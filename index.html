@@ -5,36 +5,307 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>মিলরোড ঠাকুরবাড়ী বারোয়ারী মণ্ডপ</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* হোমপেজ স্পেসিফিক স্টাইল */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('assets/images/mandap-hero.jpg') center/cover no-repeat;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+        
+        .countdown-section {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-box {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+        
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+        }
+        
+        .featured-gallery {
+            padding: 3rem 1rem;
+            background-color: #f8f9fa;
+        }
+        
+        .gallery-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            height: 200px;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .notice-board {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .notice-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid white;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .countdown-box {
+                padding: 0.8rem 1rem;
+                min-width: 80px;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- হেডার সেকশন -->
     <header>
-        <img src="assets/images/logo.png" alt="মণ্ডপ লোগো" class="logo">
-        <h1>শ্রী শ্রী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা ২০২৪</h1>
-        <p>১০-১২ অক্টোবর, কলকাতা</p>
+        <div class="header-container">
+            <img src="assets/images/logo.png" alt="মিলরোড ঠাকুরবাড়ী লোগো" class="logo">
+            <div class="header-text">
+                <h1>মিলরোড ঠাকুরবাড়ী বারোয়ারী মণ্ডপ</h1>
+                <p>প্রতিষ্ঠা ১৯৫২ | ঐতিহ্য ও সংস্কৃতির ধারক</p>
+            </div>
+        </div>
     </header>
 
+    <!-- নেভিগেশন -->
     <nav>
-        <a href="index.html">হোম</a>
-        <a href="about.html">ইতিহাস</a>
-        <a href="events.html">আয়োজন</a>
-        <a href="gallery.html">গ্যালারি</a>
-        <a href="location.html">অবস্থান</a>
-        <a href="contact.html">যোগাযোগ</a>
+        <div class="nav-container">
+            <a href="index.html" class="active">হোম</a>
+            <a href="about.html">ইতিহাস</a>
+            <a href="events.html">আয়োজন</a>
+            <a href="gallery.html">গ্যালারি</a>
+            <a href="location.html">অবস্থান</a>
+            <a href="contact.html">যোগাযোগ</a>
+            <div class="mobile-menu-btn">☰</div>
+        </div>
     </nav>
 
-    <section id="countdown">
-        <h2>আর মাত্র...</h2>
-        <div id="timer"></div>
+    <!-- হিরো সেকশন -->
+    <section class="hero-section">
+        <h1 class="hero-title">শ্রী শ্রী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা ২০২৪</h1>
+        <p class="hero-subtitle">১০-১২ অক্টোবর, কলকাতা | ৭২ বছরের ঐতিহ্যবাহী বারোয়ারী পূজা</p>
+        <a href="events.html" class="btn btn-large">প্রোগ্রাম সিডিউল দেখুন</a>
     </section>
 
-    <section id="notice-board">
-        <h2>নোটিশ বোর্ড</h2>
-        <div class="notice urgent">
-            <p>🚨 আগামীকাল সকাল ১০টায় মণ্ডপ উদ্বোধন</p>
+    <!-- কাউন্টডাউন সেকশন -->
+    <section class="countdown-section">
+        <h2>আর মাত্র...</h2>
+        <div class="countdown-container" id="countdown">
+            <div class="countdown-box">
+                <div class="countdown-value" id="days">০০</div>
+                <div class="countdown-label">দিন</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-value" id="hours">০০</div>
+                <div class="countdown-label">ঘণ্টা</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-value" id="minutes">০০</div>
+                <div class="countdown-label">মিনিট</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-value" id="seconds">০০</div>
+                <div class="countdown-label">সেকেন্ড</div>
+            </div>
         </div>
     </section>
 
+    <!-- ফিচার্ড গ্যালারি -->
+    <section class="featured-gallery">
+        <div class="container">
+            <h2>গ্যালারি থেকে নির্বাচিত ছবি</h2>
+            <p>আমাদের মণ্ডপের সেরা মুহূর্তগুলো</p>
+            
+            <div class="gallery-preview" id="featuredGallery">
+                <!-- ডাইনামিকভাবে ৪টি র্যান্ডম ছবি লোড হবে -->
+                <div class="loading">ছবি লোড হচ্ছে...</div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 2rem;">
+                <a href="gallery.html" class="btn">সমস্ত গ্যালারি দেখুন</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- নোটিশ বোর্ড -->
+    <section class="notice-board">
+        <div class="container">
+            <h2>নোটিশ বোর্ড</h2>
+            <div id="noticeContainer">
+                <!-- ডাইনামিকভাবে নোটিশ লোড হবে -->
+                <div class="notice-item">
+                    <p>মণ্ডপ উদ্বোধন হবে ১০ অক্টোবর সকাল ১০টায়</p>
+                    <small>আপডেট: ০৫ অক্টোবর ২০২৪</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ফুটার -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <img src="assets/images/logo-white.png" alt="লোগো" class="footer-logo">
+                <p>৭২ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>দ্রুত লিঙ্ক</h3>
+                <a href="about.html">ইতিহাস</a>
+                <a href="events.html">আয়োজন</a>
+                <a href="gallery.html">গ্যালারি</a>
+                <a href="contact.html">যোগাযোগ</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>যোগাযোগ</h3>
+                <p>১২৩ মিলরোড, কলকাতা - ৭০০০৫০</p>
+                <p>📞 ৯৮৭৬৫৪৩২১০</p>
+                <p>📧 info@milroadthakurbari.com</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© ২০২৪ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি | সকল স্বত্ব সংরক্ষিত</p>
+        </div>
+    </footer>
+
+    <!-- স্ক্রিপ্ট -->
+    <script src="assets/js/main.js"></script>
     <script src="assets/js/countdown.js"></script>
+    <script src="assets/js/firebase.js"></script>
+    
+    <script>
+        // Firebase থেকে ফিচার্ড গ্যালারি লোড
+        function loadFeaturedGallery() {
+            const galleryRef = firebase.database().ref('gallery').limitToLast(4);
+            const galleryContainer = document.getElementById('featuredGallery');
+            
+            galleryRef.on('value', (snapshot) => {
+                const galleryData = snapshot.val();
+                galleryContainer.innerHTML = '';
+                
+                if (galleryData) {
+                    Object.keys(galleryData).forEach(key => {
+                        const item = galleryData[key];
+                        const galleryItem = document.createElement('div');
+                        galleryItem.className = 'gallery-item';
+                        galleryItem.innerHTML = `
+                            <a href="gallery.html">
+                                <img src="${item.imageUrl}" alt="${item.caption || 'মিলরোড ঠাকুরবাড়ী'}">
+                            </a>
+                        `;
+                        galleryContainer.appendChild(galleryItem);
+                    });
+                } else {
+                    galleryContainer.innerHTML = '<p>কোন ছবি পাওয়া যায়নি</p>';
+                }
+            });
+        }
+        
+        // Firebase থেকে নোটিশ লোড
+        function loadNotices() {
+            const noticesRef = firebase.database().ref('notices').limitToLast(3);
+            const noticeContainer = document.getElementById('noticeContainer');
+            
+            noticesRef.on('value', (snapshot) => {
+                const noticesData = snapshot.val();
+                noticeContainer.innerHTML = '';
+                
+                if (noticesData) {
+                    Object.keys(noticesData).forEach(key => {
+                        const notice = noticesData[key];
+                        const noticeItem = document.createElement('div');
+                        noticeItem.className = 'notice-item';
+                        noticeItem.innerHTML = `
+                            <p>${notice.text}</p>
+                            <small>আপডেট: ${new Date(notice.timestamp).toLocaleDateString('bn-BD')}</small>
+                        `;
+                        noticeContainer.appendChild(noticeItem);
+                    });
+                }
+            });
+        }
+        
+        // ডকুমেন্ট রেডি হলে ফাংশন কল
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFeaturedGallery();
+            loadNotices();
+        });
+    </script>
 </body>
 </html>
