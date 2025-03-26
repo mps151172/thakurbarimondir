@@ -169,6 +169,45 @@ const translations = {
         'en': 'Current Message',
         'hi': 'वर्तमान संदेश'
     }
+    // About Page Specific Translations
+'about-title': {
+    'bn': 'ইতিহাস - মিলরোড ঠাকুরবাড়ী',
+    'en': 'History - Milroad Thakurbari',
+    'hi': 'इतिहास - मिलरोड ठाकुरबाड़ी'
+},
+'about-subtitle': {
+    'bn': '৭২ বছরের গৌরবময় ঐতিহ্য',
+    'en': '72 Years of Glorious Heritage',
+    'hi': '72 वर्षों की गौरवशाली विरासत'
+},
+'timeline-heading': {
+    'bn': 'আমাদের যাত্রাপথ',
+    'en': 'Our Journey',
+    'hi': 'हमारी यात्रा'
+},
+// Add all other timeline year and description translations
+'year-1952': {
+    'bn': '১৯৫২',
+    'en': '1952',
+    'hi': '१९५२'
+},
+'timeline-1952-title': {
+    'bn': 'প্রতিষ্ঠা পর্ব',
+    'en': 'Foundation',
+    'hi': 'स्थापना'
+},
+// Continue for all timeline items
+'committee-title': {
+    'bn': 'বর্তমান কমিটি',
+    'en': 'Current Committee',
+    'hi': 'वर्तमान समिति'
+},
+'president-name': {
+    'bn': 'ড. অরুণ কুমার চক্রবর্তী',
+    'en': 'Dr. Arun Kumar Chakraborty',
+    'hi': 'डॉ. अरुण कुमार चक्रवर्ती'
+}
+// Add all other committee member translations
 };
 
 // For Node.js/CommonJS environments
