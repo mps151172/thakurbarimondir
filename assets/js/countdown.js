@@ -1,5 +1,5 @@
 // পূজার তারিখ সেট করুন (অক্টোবর 10, 2024 সকাল 10টা)
-const pujaDate = new Date("October 10, 2024 10:00:00").getTime();
+const pujaDate = new Date("October 10, 2025 10:00:00").getTime();
 
 const countdownTimer = setInterval(function() {
     const now = new Date().getTime();
