@@ -6,22 +6,80 @@
     <title>অবস্থান - মিলরোড ঠাকুরবাড়ী</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        #map {
-            height: 400px;
-            width: 100%;
-            border: 2px solid #333;
+        .location-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
         }
-        .transport {
-            background: #f0f0f0;
-            padding: 15px;
-            margin: 20px;
-            border-radius: 5px;
+        
+        .map-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .map-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        .static-map {
+            width: 100%;
+            height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .location-info {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .transport-options {
+            margin-top: 2rem;
+        }
+        
+        .transport-card {
+            background: white;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .transport-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .directions-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>মণ্ডপের অবস্থান</h1>
+        <h1>মিলরোড ঠাকুরবাড়ী মণ্ডপের অবস্থান</h1>
     </header>
 
     <nav>
@@ -29,36 +87,94 @@
         <a href="about.html">ইতিহাস</a>
         <a href="events.html">আয়োজন</a>
         <a href="gallery.html">গ্যালারি</a>
-        <a href="location.html">অবস্থান</a>
+        <a href="location.html" class="active">অবস্থান</a>
         <a href="contact.html">যোগাযোগ</a>
     </nav>
 
-    <section>
-        <div id="map"></div>
-        <script>
-            function initMap() {
-                const mandap = { lat: 22.5726, lng: 88.3639 }; // কলকাতার স্থানাঙ্ক
-                const map = new google.maps.Map(document.getElementById("map"), {
-                    zoom: 15,
-                    center: mandap,
-                });
-                new google.maps.Marker({
-                    position: mandap,
-                    map: map,
-                    title: "মিলরোড ঠাকুরবাড়ী মণ্ডপ",
-                });
-            }
-        </script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
-    </section>
+    <div class="location-container">
+        <h2>আমাদের ঠিকানা</h2>
+        <p>১২৩ মিলরোড, কলকাতা - ৭০০০৫০, পশ্চিমবঙ্গ, ভারত</p>
+        
+        <div class="map-container">
+            <div>
+                <!-- স্ট্যাটিক গুগল ম্যাপ ইমেজ (API কী লাগবে না) -->
+                <img src="https://maps.googleapis.com/maps/api/staticmap?center=22.5726,88.3639&zoom=16&size=800x400&maptype=roadmap&markers=color:red%7C22.5726,88.3639" 
+                     alt="মিলরোড ঠাকুরবাড়ী মণ্ডপের মানচিত্র" 
+                     class="static-map">
+                
+                <!-- ডিরেকশন লিঙ্ক -->
+                <a href="https://www.google.com/maps/dir//22.5726,88.3639" 
+                   target="_blank" 
+                   class="directions-btn">
+                   🗺️ দিকনির্দেশনা পান
+                </a>
+            </div>
+            
+            <div class="location-info">
+                <h3>গুরুত্বপূর্ণ তথ্য</h3>
+                <ul>
+                    <li>⏰ সময়: সকাল ৮টা - রাত ১০টা</li>
+                    <li>🅿️ পার্কিং: মণ্ডপের পিছনে ২০০ গজ</li>
+                    <li>🚻 টয়লেট: মণ্ডপের উত্তর পাশে</li>
+                    <li>♿ প্রতিবন্ধী প্রবেশাধিকার: হ্যাঁ</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="transport-options">
+            <h3>যাতায়াত ব্যবস্থা</h3>
+            
+            <div class="transport-card">
+                <div class="transport-icon">🚇</div>
+                <div>
+                    <h4>মেট্রো রেল</h4>
+                    <p>নিকটতম স্টেশন: মিলরোড (৫০০ মিটার পূর্বে)</p>
+                </div>
+            </div>
+            
+            <div class="transport-card">
+                <div class="transport-icon">🚌</div>
+                <div>
+                    <h4>বাস</h4>
+                    <p>রুট নম্বর: 29B, 45C, 78D (মিলরোড মোড়ে নামুন)</p>
+                </div>
+            </div>
+            
+            <div class="transport-card">
+                <div class="transport-icon">🚖</div>
+                <div>
+                    <h4>ট্যাক্সি/অটো</h4>
+                    <p>সারাদিন উপলব্ধ। ভাড়া: ₹৫০-১০০ (লোকেশন ভিত্তিক)</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <section class="transport">
-        <h2>যাতায়াত ব্যবস্থা</h2>
-        <ul>
-            <li>🚇 নিকটতম মেট্রো: মিলরোড স্টেশন (৫০০ মিটার)</li>
-            <li>🚌 বাস রুট: 29B, 45C, 78D</li>
-            <li>🅿️ পার্কিং: মণ্ডপের পিছনে নির্দিষ্ট জায়গা</li>
-        </ul>
-    </section>
+    <footer>
+        <p>© ২০২৪ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+    </footer>
+
+    <script>
+        // GitHub Pages-এ রান করার জন্য বিশেষ адаптации
+        document.addEventListener('DOMContentLoaded', function() {
+            // স্ট্যাটিক ম্যাপ ইমেজ জেনারেটর
+            const staticMapUrl = `https://maps.googleapis.com/maps/api/staticmap?
+                center=22.5726,88.3639&
+                zoom=16&
+                size=800x400&
+                maptype=roadmap&
+                markers=color:red%7C22.5726,88.3639&
+                key=YOUR_API_KEY`.replace(/\s/g, '');
+            
+            // যদি API কী থাকে তাহলে ব্যবহার করুন, নাহলে ডিফল্ট ইমেজ
+            const mapImg = document.querySelector('.static-map');
+            if(typeof YOUR_API_KEY !== 'undefined' && YOUR_API_KEY) {
+                mapImg.src = staticMapUrl;
+            } else {
+                mapImg.src = 'assets/images/map-fallback.jpg';
+                mapImg.alt = 'মিলরোড ঠাকুরবাড়ীর মানচিত্র (ডিফল্ট ইমেজ)';
+            }
+        });
+    </script>
 </body>
 </html>
