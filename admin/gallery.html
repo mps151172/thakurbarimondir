@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>গ্যালারি ম্যানেজমেন্ট - মিলরোড ঠাকুরবাড়ী</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <style>
+        .gallery-manager {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            margin: 2rem;
+        }
+        .image-uploader {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .image-preview {
+            max-width: 100%;
+            margin-top: 1rem;
+            display: none;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .gallery-item {
+            position: relative;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+        .gallery-item .actions {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: space-around;
+            padding: 5px;
+        }
+        .gallery-item button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-nav">
+        <a href="dashboard.html">ড্যাশবোর্ড</a>
+        <a href="notices.html">নোটিশ</a>
+        <a href="gallery.html" class="active">গ্যালারি</a>
+        <a href="#">লগআউট</a>
+    </div>
+
+    <div class="gallery-manager">
+        <div class="image-uploader">
+            <h2>নতুন ছবি যোগ করুন</h2>
+            <form id="uploadForm">
+                <div>
+                    <label for="imageCategory">ক্যাটাগরি:</label>
+                    <select id="imageCategory" required>
+                        <option value="2024">২০২৪ সালের মণ্ডপ</option>
+                        <option value="construction">নির্মাণ পর্যায়</option>
+                        <option value="history">ঐতিহাসিক ছবি</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="imageUpload">ছবি সিলেক্ট করুন:</label>
+                    <input type="file" id="imageUpload" accept="image/*" required>
+                    <img id="imagePreview" class="image-preview" alt="প্রিভিউ">
+                </div>
+                
+                <div>
+                    <label for="imageCaption">ক্যাপশন:</label>
+                    <textarea id="imageCaption" rows="3"></textarea>
+                </div>
+                
+                <button type="submit">আপলোড করুন</button>
+            </form>
+        </div>
+
+        <div class="gallery-list">
+            <h2>গ্যালারি আইটেমসমূহ</h2>
+            <div class="category-filter">
+                <label for="filterCategory">ফিল্টার:</label>
+                <select id="filterCategory">
+                    <option value="all">সব ক্যাটাগরি</option>
+                    <option value="2024">২০২৪ সালের মণ্ডপ</option>
+                    <option value="construction">নির্মাণ পর্যায়</option>
+                    <option value="history">ঐতিহাসিক ছবি</option>
+                </select>
+            </div>
+            
+            <div class="gallery-grid" id="galleryContainer">
+                <!-- ডাইনামিকভাবে ছবি লোড হবে -->
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/firebase.js"></script>
+    <script src="../assets/js/admin-gallery.js"></script>
+</body>
+</html>

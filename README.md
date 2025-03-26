@@ -1,2 +1,15 @@
-# thakurbarimondir
-my first project 
+# মিলরোড ঠাকুরবাড়ী মণ্ডপ ওয়েবসাইট
+
+## সেটআপ নির্দেশিকা
+
+1. সমস্ত ফাইল ডাউনলোড করুন
+2. Firebase কনফিগারেশন:
+   - `assets/js/firebase.js` ফাইলে আপনার Firebase প্রজেক্টের ক্রেডেনশিয়ালস যোগ করুন
+3. ইমেজ যোগ করুন:
+   - `assets/images` ফোল্ডারে প্রয়োজনীয় ছবি যোগ করুন
+4. গুগল ম্যাপ API:
+   - `location.html` ফাইলে `YOUR_API_KEY` এর স্থানে গুগল ম্যাপ API কী বসান
+
+## ডেভেলপমেন্ট সার্ভার চালু
+```bash
+python3 -m http.server 8000

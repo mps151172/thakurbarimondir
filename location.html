@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অবস্থান - মিলরোড ঠাকুরবাড়ী</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+            border: 2px solid #333;
+        }
+        .transport {
+            background: #f0f0f0;
+            padding: 15px;
+            margin: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>মণ্ডপের অবস্থান</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">হোম</a>
+        <a href="about.html">ইতিহাস</a>
+        <a href="events.html">আয়োজন</a>
+        <a href="gallery.html">গ্যালারি</a>
+        <a href="location.html">অবস্থান</a>
+        <a href="contact.html">যোগাযোগ</a>
+    </nav>
+
+    <section>
+        <div id="map"></div>
+        <script>
+            function initMap() {
+                const mandap = { lat: 22.5726, lng: 88.3639 }; // কলকাতার স্থানাঙ্ক
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 15,
+                    center: mandap,
+                });
+                new google.maps.Marker({
+                    position: mandap,
+                    map: map,
+                    title: "মিলরোড ঠাকুরবাড়ী মণ্ডপ",
+                });
+            }
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+    </section>
+
+    <section class="transport">
+        <h2>যাতায়াত ব্যবস্থা</h2>
+        <ul>
+            <li>🚇 নিকটতম মেট্রো: মিলরোড স্টেশন (৫০০ মিটার)</li>
+            <li>🚌 বাস রুট: 29B, 45C, 78D</li>
+            <li>🅿️ পার্কিং: মণ্ডপের পিছনে নির্দিষ্ট জায়গা</li>
+        </ul>
+    </section>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>গ্যালারি - মিলরোড ঠাকুরবাড়ী</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <style>
+        .gallery-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gallery-categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: #e63946;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: #c1121f;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-item a {
+            display: block;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-caption {
+            padding: 0.8rem;
+            background: white;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+            
+            .gallery-item a {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>মিলরোড ঠাকুরবাড়ীর গ্যালারি</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">হোম</a>
+        <a href="about.html">ইতিহাস</a>
+        <a href="events.html">আয়োজন</a>
+        <a href="gallery.html" class="active">গ্যালারি</a>
+        <a href="location.html">অবস্থান</a>
+        <a href="contact.html">যোগাযোগ</a>
+    </nav>
+
+    <div class="gallery-container">
+        <div class="gallery-categories">
+            <button class="category-btn active" data-category="all">সব ছবি</button>
+            <button class="category-btn" data-category="2024">২০২৪ সালের মণ্ডপ</button>
+            <button class="category-btn" data-category="construction">নির্মাণ পর্যায়</button>
+            <button class="category-btn" data-category="history">ঐতিহাসিক ছবি</button>
+        </div>
+        
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- ডাইনামিকভাবে ছবি লোড হবে -->
+            <div class="loading">ছবি লোড হচ্ছে...</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© ২০২৪ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+    </footer>
+
+    <!-- Lightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    
+    <!-- গ্যালারি স্ক্রিপ্ট -->
+    <script src="assets/js/gallery.js"></script>
+    
+    <script>
+        // Firebase কনফিগারেশন
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "your-project.firebaseapp.com",
+            databaseURL: "https://your-project.firebaseio.com",
+            projectId: "your-project",
+            storageBucket: "your-project.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        // Firebase ইনিশিয়ালাইজ
+        firebase.initializeApp(firebaseConfig);
+        
+        // Lightbox কনফিগারেশন
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'albumLabel': "ছবি %1 of %2"
+        });
+    </script>
+</body>
+</html>

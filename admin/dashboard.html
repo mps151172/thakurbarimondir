@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>এডমিন ড্যাশবোর্ড - মিলরোড ঠাকুরবাড়ী</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .admin-nav {
+            background: #333;
+            padding: 15px;
+        }
+        .admin-nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+        .stat-box {
+            background: #f0f0f0;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-nav">
+        <a href="dashboard.html">ড্যাশবোর্ড</a>
+        <a href="notices.html">নোটিশ ম্যানেজমেন্ট</a>
+        <a href="#">লগআউট</a>
+    </div>
+
+    <div class="stats">
+        <div class="stat-box">
+            <h3>মোট ভিজিটর</h3>
+            <p>1,245</p>
+        </div>
+        <div class="stat-box">
+            <h3>নতুন মেসেজ</h3>
+            <p>12</p>
+        </div>
+        <div class="stat-box">
+            <h3>সর্বশেষ আপডেট</h3>
+            <p>১০ অক্টোবর</p>
+        </div>
+    </div>
+</body>
+</html>
