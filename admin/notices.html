@@ -1,51 +1,57 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>নোটিশ ম্যানেজমেন্ট - মিলরোড ঠাকুরবাড়ী</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        .notice-form {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #f9f9f9;
-        }
-        .notice-list {
-            margin-top: 30px;
-        }
-        .notice-item {
-            background: white;
-            padding: 15px;
-            margin: 10px 0;
-            border-left: 4px solid #e63946;
-        }
-    </style>
-</head>
-<body>
-    <div class="admin-nav">
-        <a href="dashboard.html">ড্যাশবোর্ড</a>
-        <a href="notices.html">নোটিশ ম্যানেজমেন্ট</a>
-        <a href="#">লগআউট</a>
-    </div>
-
-    <div class="notice-form">
-        <h2>নতুন নোটিশ তৈরি করুন</h2>
-        <form>
-            <input type="text" placeholder="শিরোনাম" style="width:100%; padding:10px;">
-            <textarea placeholder="বিস্তারিত" rows="5" style="width:100%; margin:10px 0;"></textarea>
-            <button type="submit">প্রকাশ করুন</button>
-        </form>
-    </div>
-
-    <div class="notice-list">
-        <h2>সক্রিয় নোটিশসমূহ</h2>
-        <div class="notice-item">
-            <h3>মণ্ডপ উদ্বোধন</h3>
-            <p>১০ অক্টোবর সকাল ১০টায় মণ্ডপ উদ্বোধন করা হবে</p>
-            <small>প্রকাশের তারিখ: ০৫ অক্টোবর ২০২৪</small>
+<!-- Add this section to admin/notices.html -->
+<section class="welcome-message-editor">
+    <h2>শুভেচ্ছা বার্তা ম্যানেজমেন্ট</h2>
+    <form id="welcomeForm">
+        <textarea id="welcomeMessage" rows="4" placeholder="এখানে শুভেচ্ছা বার্তা লিখুন..."></textarea>
+        <div>
+            <label for="messageExpiry">মেয়াদ উত্তীর্ণের তারিখ:</label>
+            <input type="date" id="messageExpiry" required>
         </div>
+        <button type="submit">আপডেট করুন</button>
+    </form>
+    <div id="currentWelcome">
+        <h3>বর্তমান শুভেচ্ছা বার্তা:</h3>
+        <div id="currentMessage"></div>
+        <small>মেয়াদ উত্তীর্ণ: <span id="currentExpiry"></span></small>
     </div>
-</body>
-</html>
+</section>
+
+<script>
+// Load current welcome message
+function loadWelcomeMessage() {
+    const welcomeRef = firebase.database().ref('welcomeMessage');
+    welcomeRef.on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            document.getElementById('welcomeMessage').value = data.message;
+            document.getElementById('messageExpiry').value = data.expiry;
+            document.getElementById('currentMessage').innerHTML = data.message;
+            document.getElementById('currentExpiry').textContent = new Date(data.expiry).toLocaleDateString('bn-BD');
+        }
+    });
+}
+
+// Save welcome message
+document.getElementById('welcomeForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const message = document.getElementById('welcomeMessage').value;
+    const expiry = document.getElementById('messageExpiry').value;
+    
+    if (!message || !expiry) {
+        alert('দয়া করে বার্তা এবং মেয়াদ উত্তীর্ণের তারিখ পূরণ করুন');
+        return;
+    }
+
+    firebase.database().ref('welcomeMessage').set({
+        message: message,
+        expiry: expiry,
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+    }).then(() => {
+        alert('শুভেচ্ছা বার্তা সফলভাবে আপডেট করা হয়েছে!');
+    });
+});
+
+// Load on page load
+loadWelcomeMessage();
+</script>
