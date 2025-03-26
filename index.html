@@ -3,12 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>মিলরোড ঠাকুরবাড়ী বারোয়ারী মণ্ডপ</title>
+    <title data-translate="site-title">মিলরোড ঠাকুরবাড়ী বারোয়ারী মণ্ডপ</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Language Alternatives for SEO -->
+    <link rel="alternate" hreflang="bn" href="https://yourwebsite.com" />
+    <link rel="alternate" hreflang="en" href="https://yourwebsite.com/en" />
+    <link rel="alternate" hreflang="hi" href="https://yourwebsite.com/hi" />
     <style>
-        /* হোমপেজ স্পেসিফিক স্টাইল */
+        /* Language Specific Styles */
+        [lang="hi"] {
+            direction: rtl;
+            text-align: right;
+            font-family: 'Hind Siliguri', 'Noto Sans Devanagari', sans-serif;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+            z-index: 100;
+        }
+        
+        .language-switcher button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher button:hover, 
+        .language-switcher button.active {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero Section */
         .hero-section {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
                         url('assets/images/mandap-hero.jpg') center/cover no-repeat;
@@ -20,20 +58,31 @@
             text-align: center;
             color: white;
             padding: 0 1rem;
+            position: relative;
+        }
+        
+        .welcome-message {
+            background: rgba(255,255,255,0.9);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .welcome-message-content {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #333;
         }
         
         .hero-title {
             font-size: 3rem;
-            margin-bottom: 1rem;
+            margin: 1rem 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            max-width: 800px;
-        }
-        
+        /* Countdown Section */
         .countdown-section {
             background-color: var(--secondary-color);
             color: white;
@@ -63,59 +112,22 @@
         
         .countdown-label {
             font-size: 1rem;
+            text-transform: uppercase;
         }
         
-        .featured-gallery {
-            padding: 3rem 1rem;
-            background-color: #f8f9fa;
-        }
-        
-        .gallery-preview {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-        
-        .gallery-item {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            height: 200px;
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .notice-board {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .notice-item {
-            background: rgba(255,255,255,0.1);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-left: 4px solid white;
-        }
-        
+        /* Responsive Styles */
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2rem;
             }
             
-            .hero-subtitle {
-                font-size: 1.2rem;
+            .welcome-message {
+                padding: 1rem;
+                margin: 0 1rem;
+            }
+            
+            .welcome-message-content {
+                font-size: 1rem;
             }
             
             .countdown-box {
@@ -126,17 +138,36 @@
             .countdown-value {
                 font-size: 2rem;
             }
+            
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-switcher button {
+                padding: 3px 6px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button onclick="changeLanguage('bn')" class="active">বাংলা</button>
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('hi')">हिन्दी</button>
+    </div>
+
     <!-- হেডার সেকশন -->
     <header>
         <div class="header-container">
-            <img src="assets/images/logo.png" alt="মিলরোড ঠাকুরবাড়ী লোগো" class="logo">
+            <img src="assets/images/logo.png" alt="মিলরোড ঠাকুরবাড়ী লোগो" class="logo">
             <div class="header-text">
-                <h1>মিলরোড ঠাকুরবাড়ী বারোয়ারী মণ্ডপ</h1>
-                <p>প্রতিষ্ঠা ১৯৫২ | ঐতিহ্য ও সংস্কৃতির ধারক</p>
+                <h1 data-translate="site-title">মিলরোড ঠাকুরবাড়ী বারোয়ারী মণ্ডপ</h1>
+                <p data-translate="established-text">প্রতিষ্ঠা ১৯৫২ | ঐতিহ্য ও সংস্কৃতির ধারক</p>
             </div>
         </div>
     </header>
@@ -144,42 +175,48 @@
     <!-- নেভিগেশন -->
     <nav>
         <div class="nav-container">
-            <a href="index.html" class="active">হোম</a>
-            <a href="about.html">ইতিহাস</a>
-            <a href="events.html">আয়োজন</a>
-            <a href="gallery.html">গ্যালারি</a>
-            <a href="location.html">অবস্থান</a>
-            <a href="contact.html">যোগাযোগ</a>
+            <a href="index.html" class="active" data-translate="home-link">হোম</a>
+            <a href="about.html" data-translate="history-link">ইতিহাস</a>
+            <a href="events.html" data-translate="events-link">আয়োজন</a>
+            <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+            <a href="location.html" data-translate="location-link">অবস্থান</a>
+            <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
             <div class="mobile-menu-btn">☰</div>
         </div>
     </nav>
 
     <!-- হিরো সেকশন -->
     <section class="hero-section">
-        <h1 class="hero-title">শ্রী শ্রী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা ২০২৪</h1>
-        <p class="hero-subtitle">১০-১২ অক্টোবর, কলকাতা | ৭২ বছরের ঐতিহ্যবাহী বারোয়ারী পূজা</p>
-        <a href="events.html" class="btn btn-large">প্রোগ্রাম সিডিউল দেখুন</a>
+        <div class="welcome-message">
+            <div id="dynamicWelcome" class="welcome-message-content" data-translate="default-welcome">
+                <!-- Dynamic welcome message will load here -->
+                মিলরোড ঠাকুরবাড়ী বারোয়ারী মণ্ডপে আপনাকে স্বাগতম
+            </div>
+        </div>
+        
+        <h1 class="hero-title" data-translate="main-heading">শ্রী শ্রী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা ২০২৪</h1>
+        <a href="events.html" class="btn btn-large" data-translate="schedule-btn">প্রোগ্রাম সিডিউল দেখুন</a>
     </section>
 
     <!-- কাউন্টডাউন সেকশন -->
     <section class="countdown-section">
-        <h2>আর মাত্র...</h2>
+        <h2 data-translate="countdown-text">আর মাত্র...</h2>
         <div class="countdown-container" id="countdown">
             <div class="countdown-box">
                 <div class="countdown-value" id="days">০০</div>
-                <div class="countdown-label">দিন</div>
+                <div class="countdown-label" data-translate="days-label">দিন</div>
             </div>
             <div class="countdown-box">
                 <div class="countdown-value" id="hours">০০</div>
-                <div class="countdown-label">ঘণ্টা</div>
+                <div class="countdown-label" data-translate="hours-label">ঘণ্টা</div>
             </div>
             <div class="countdown-box">
                 <div class="countdown-value" id="minutes">০০</div>
-                <div class="countdown-label">মিনিট</div>
+                <div class="countdown-label" data-translate="minutes-label">মিনিট</div>
             </div>
             <div class="countdown-box">
                 <div class="countdown-value" id="seconds">০০</div>
-                <div class="countdown-label">সেকেন্ড</div>
+                <div class="countdown-label" data-translate="seconds-label">সেকেন্ড</div>
             </div>
         </div>
     </section>
@@ -187,16 +224,16 @@
     <!-- ফিচার্ড গ্যালারি -->
     <section class="featured-gallery">
         <div class="container">
-            <h2>গ্যালারি থেকে নির্বাচিত ছবি</h2>
-            <p>আমাদের মণ্ডপের সেরা মুহূর্তগুলো</p>
+            <h2 data-translate="gallery-title">গ্যালারি থেকে নির্বাচিত ছবি</h2>
+            <p data-translate="gallery-subtitle">আমাদের মণ্ডপের সেরা মুহূর্তগুলো</p>
             
             <div class="gallery-preview" id="featuredGallery">
-                <!-- ডাইনামিকভাবে ৪টি র্যান্ডম ছবি লোড হবে -->
-                <div class="loading">ছবি লোড হচ্ছে...</div>
+                <!-- Dynamic gallery items will load here -->
+                <div class="loading" data-translate="loading-text">ছবি লোড হচ্ছে...</div>
             </div>
             
             <div class="text-center" style="margin-top: 2rem;">
-                <a href="gallery.html" class="btn">সমস্ত গ্যালারি দেখুন</a>
+                <a href="gallery.html" class="btn" data-translate="view-all-btn">সমস্ত গ্যালারি দেখুন</a>
             </div>
         </div>
     </section>
@@ -204,12 +241,12 @@
     <!-- নোটিশ বোর্ড -->
     <section class="notice-board">
         <div class="container">
-            <h2>নোটিশ বোর্ড</h2>
+            <h2 data-translate="notices-title">নোটিশ বোর্ড</h2>
             <div id="noticeContainer">
-                <!-- ডাইনামিকভাবে নোটিশ লোড হবে -->
+                <!-- Dynamic notices will load here -->
                 <div class="notice-item">
-                    <p>মণ্ডপ উদ্বোধন হবে ১০ অক্টোবর সকাল ১০টায়</p>
-                    <small>আপডেট: ০৫ অক্টোবর ২০২৪</small>
+                    <p data-translate="default-notice">মণ্ডপ উদ্বোধন হবে ১০ অক্টোবর সকাল ১০টায়</p>
+                    <small data-translate="update-prefix">আপডেট: <span id="noticeDate">০৫ অক্টোবর ২০২৪</span></small>
                 </div>
             </div>
         </div>
@@ -219,20 +256,20 @@
     <footer>
         <div class="footer-container">
             <div class="footer-about">
-                <img src="assets/images/logo-white.png" alt="লোগো" class="footer-logo">
-                <p>৭২ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+                <img src="assets/images/logo-white.png" alt="মিলরোড ঠাকুরবাড়ী লোগো" class="footer-logo">
+                <p data-translate="footer-about">৭২ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
             </div>
             
             <div class="footer-links">
-                <h3>দ্রুত লিঙ্ক</h3>
-                <a href="about.html">ইতিহাস</a>
-                <a href="events.html">আয়োজন</a>
-                <a href="gallery.html">গ্যালারি</a>
-                <a href="contact.html">যোগাযোগ</a>
+                <h3 data-translate="quick-links">দ্রুত লিঙ্ক</h3>
+                <a href="about.html" data-translate="history-link">ইতিহাস</a>
+                <a href="events.html" data-translate="events-link">আয়োজন</a>
+                <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+                <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
             </div>
             
             <div class="footer-contact">
-                <h3>যোগাযোগ</h3>
+                <h3 data-translate="contact-title">যোগাযোগ</h3>
                 <p>১২৩ মিলরোড, কলকাতা - ৭০০০৫০</p>
                 <p>📞 ৯৮৭৬৫৪৩২১০</p>
                 <p>📧 info@milroadthakurbari.com</p>
@@ -240,17 +277,118 @@
         </div>
         
         <div class="copyright">
-            <p>© ২০২৪ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি | সকল স্বত্ব সংরক্ষিত</p>
+            <p data-translate="copyright-text">© ২০২৪ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি | সকল স্বত্ব সংরক্ষিত</p>
         </div>
     </footer>
 
-    <!-- স্ক্রিপ্ট -->
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    
+    <!-- Translation Library -->
+    <script src="assets/js/languages.js"></script>
+    
+    <!-- Main Scripts -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/countdown.js"></script>
-    <script src="assets/js/firebase.js"></script>
     
     <script>
-        // Firebase থেকে ফিচার্ড গ্যালারি লোড
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "your-project.firebaseapp.com",
+            databaseURL: "https://your-project.firebaseio.com",
+            projectId: "your-project",
+            storageBucket: "your-project.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        
+        // Language Management
+        let currentLanguage = 'bn'; // Default language
+        
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === (lang === 'bn' ? 'বাংলা' : lang === 'hi' ? 'हिन्दी' : 'English')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            applyTranslations();
+            loadDynamicContent();
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        // Load dynamic content based on language
+        function loadDynamicContent() {
+            loadWelcomeMessage();
+            loadNotices();
+            loadFeaturedGallery();
+        }
+        
+        // Load welcome message from Firebase
+        function loadWelcomeMessage() {
+            const welcomeRef = firebase.database().ref('welcomeMessages/default');
+            welcomeRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                const welcomeElement = document.getElementById('dynamicWelcome');
+                
+                if (data && data[currentLanguage]) {
+                    welcomeElement.innerHTML = data[currentLanguage];
+                } else {
+                    welcomeElement.innerHTML = translations['default-welcome'][currentLanguage];
+                }
+            });
+        }
+        
+        // Load notices from Firebase
+        function loadNotices() {
+            const noticesRef = firebase.database().ref('notices').limitToLast(3);
+            const noticeContainer = document.getElementById('noticeContainer');
+            
+            noticesRef.on('value', (snapshot) => {
+                const noticesData = snapshot.val();
+                noticeContainer.innerHTML = '';
+                
+                if (noticesData) {
+                    Object.keys(noticesData).forEach(key => {
+                        const notice = noticesData[key];
+                        const noticeItem = document.createElement('div');
+                        noticeItem.className = 'notice-item';
+                        
+                        const noticeText = notice[currentLanguage] || notice['bn'] || translations['default-notice'][currentLanguage];
+                        const noticeDate = new Date(notice.timestamp).toLocaleDateString(currentLanguage, {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        });
+                        
+                        noticeItem.innerHTML = `
+                            <p>${noticeText}</p>
+                            <small>${translations['update-prefix'][currentLanguage]} ${noticeDate}</small>
+                        `;
+                        noticeContainer.appendChild(noticeItem);
+                    });
+                } else {
+                    noticeContainer.innerHTML = `
+                        <div class="notice-item">
+                            <p>${translations['default-notice'][currentLanguage]}</p>
+                            <small>${translations['update-prefix'][currentLanguage]} <span id="noticeDate">${new Date().toLocaleDateString(currentLanguage)}</span></small>
+                        </div>
+                    `;
+                }
+            });
+        }
+        
+        // Load featured gallery images
         function loadFeaturedGallery() {
             const galleryRef = firebase.database().ref('gallery').limitToLast(4);
             const galleryContainer = document.getElementById('featuredGallery');
@@ -266,45 +404,34 @@
                         galleryItem.className = 'gallery-item';
                         galleryItem.innerHTML = `
                             <a href="gallery.html">
-                                <img src="${item.imageUrl}" alt="${item.caption || 'মিলরোড ঠাকুরবাড়ী'}">
+                                <img src="${item.imageUrl}" alt="${item.caption?.[currentLanguage] || translations['gallery-image'][currentLanguage]}">
                             </a>
                         `;
                         galleryContainer.appendChild(galleryItem);
                     });
                 } else {
-                    galleryContainer.innerHTML = '<p>কোন ছবি পাওয়া যায়নি</p>';
+                    galleryContainer.innerHTML = `<p>${translations['no-images'][currentLanguage]}</p>`;
                 }
             });
         }
         
-        // Firebase থেকে নোটিশ লোড
-        function loadNotices() {
-            const noticesRef = firebase.database().ref('notices').limitToLast(3);
-            const noticeContainer = document.getElementById('noticeContainer');
-            
-            noticesRef.on('value', (snapshot) => {
-                const noticesData = snapshot.val();
-                noticeContainer.innerHTML = '';
-                
-                if (noticesData) {
-                    Object.keys(noticesData).forEach(key => {
-                        const notice = noticesData[key];
-                        const noticeItem = document.createElement('div');
-                        noticeItem.className = 'notice-item';
-                        noticeItem.innerHTML = `
-                            <p>${notice.text}</p>
-                            <small>আপডেট: ${new Date(notice.timestamp).toLocaleDateString('bn-BD')}</small>
-                        `;
-                        noticeContainer.appendChild(noticeItem);
-                    });
-                }
-            });
-        }
-        
-        // ডকুমেন্ট রেডি হলে ফাংশন কল
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            loadFeaturedGallery();
-            loadNotices();
+            // Set initial language from localStorage or browser preference
+            const savedLanguage = localStorage.getItem('preferredLanguage');
+            const browserLanguage = navigator.language.split('-')[0];
+            
+            if (savedLanguage) {
+                changeLanguage(savedLanguage);
+            } else if (['bn', 'en', 'hi'].includes(browserLanguage)) {
+                changeLanguage(browserLanguage);
+            } else {
+                applyTranslations();
+                loadDynamicContent();
+            }
+            
+            // Initialize countdown
+            initializeCountdown();
         });
     </script>
 </body>
