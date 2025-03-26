@@ -1,21 +1,31 @@
-// মোবাইল মেনু টগল ফাংশন
-document.addEventListener('DOMContentLoaded', function() {
-    const menuBtn = document.createElement('div');
-    menuBtn.className = 'mobile-menu-btn';
-    menuBtn.innerHTML = '☰';
-    document.querySelector('nav').prepend(menuBtn);
-    
-    menuBtn.addEventListener('click', function() {
-        document.querySelector('nav').classList.toggle('active');
-    });
-});
+// Language management
+let currentLanguage = 'bn'; // Default language
 
-// স্মুথ স্ক্রোলিং
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    applyTranslations();
+    localStorage.setItem('preferredLanguage', lang);
+}
+
+function applyTranslations() {
+    // Get all elements with data-translate attribute
+    const translatableElements = document.querySelectorAll('[data-translate]');
+    
+    translatableElements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[key] && translations[key][currentLanguage]) {
+            element.textContent = translations[key][currentLanguage];
+        }
     });
+    
+    // Update HTML lang attribute
+    document.documentElement.lang = currentLanguage;
+}
+
+// Load preferred language from localStorage
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLanguage = localStorage.getItem('preferredLanguage');
+    if (savedLanguage) {
+        changeLanguage(savedLanguage);
+    }
 });
