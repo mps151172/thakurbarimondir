@@ -3,24 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ইতিহাস - মিলরোড ঠাকুরবাড়ী</title>
+    <title data-translate="about-title">ইতিহাস - মিলরোড ঠাকুরবাড়ী</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* About Page Specific Styles */
+        .about-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('../assets/images/about-bg.jpg') center/cover no-repeat;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: var(--primary-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: white;
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+            text-align: right;
+        }
+        
+        .right {
+            left: 50%;
+            text-align: left;
+        }
+        
+        .left::after {
+            right: -12px;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .committee-section {
+            background: #f8f9fa;
+            padding: 3rem 1rem;
+        }
+        
+        .committee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .committee-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .committee-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 3px solid var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .left, .right {
+                left: 0;
+                text-align: left;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>মিলরোড ঠাকুরবাড়ীর গৌরবময় ইতিহাস</h1>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button onclick="changeLanguage('bn')" class="active">বাংলা</button>
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('hi')">हिन्दी</button>
+    </div>
+
+    <!-- Header -->
+    <header class="about-header">
+        <h1 data-translate="about-title">মিলরোড ঠাকুরবাড়ীর ইতিহাস</h1>
+        <p data-translate="about-subtitle">৭২ বছরের গৌরবময় ঐতিহ্য</p>
     </header>
 
-    <section class="history">
-        <article>
-            <h2>১৯৫২: প্রতিষ্ঠার ইতিহাস</h2>
-            <img src="assets/images/history/1960.jpg" alt="প্রতিষ্ঠাকালীন ছবি">
-            <p>স্থানীয় বাসিন্দাদের উদ্যোগে প্রতিষ্ঠিত হয় এই মণ্ডপ...</p>
-        </article>
-    </section>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" data-translate="home-link">হোম</a>
+            <a href="about.html" class="active" data-translate="history-link">ইতিহাস</a>
+            <a href="events.html" data-translate="events-link">আয়োজন</a>
+            <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+            <a href="location.html" data-translate="location-link">অবস্থান</a>
+            <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
+            <div class="mobile-menu-btn">☰</div>
+        </div>
+    </nav>
 
+    <!-- Main Content -->
+    <main>
+        <section class="timeline-intro">
+            <div class="container">
+                <h2 data-translate="timeline-heading">আমাদের যাত্রাপথ</h2>
+                <p data-translate="timeline-subtext">১৯৫২ সাল থেকে আজ পর্যন্ত আমাদের গৌরবময় ইতিহাস</p>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-year" data-translate="year-1952">১৯৫২</div>
+                    <h3 data-translate="timeline-1952-title">প্রতিষ্ঠা পর্ব</h3>
+                    <p data-translate="timeline-1952-desc">স্থানীয় বাসিন্দাদের উদ্যোগে প্রতিষ্ঠিত হয় মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+                    <img src="assets/images/history/1952.jpg" alt="প্রতিষ্ঠাকালীন ছবি" style="width:100%; margin-top:10px;">
+                </div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-year" data-translate="year-1965">১৯৬৫</div>
+                    <h3 data-translate="timeline-1965-title">প্রথম পাকা মণ্ডপ</h3>
+                    <p data-translate="timeline-1965-desc">স্থায়ী কাঠামো নির্মাণের মাধ্যমে পূজার আয়োজন শুরু</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-year" data-translate="year-1980">১৯৮০</div>
+                    <h3 data-translate="timeline-1980-title">সাংস্কৃতিক আয়োজন শুরু</h3>
+                    <p data-translate="timeline-1980-desc">প্রথমবারের মত নাটক ও সাংস্কৃতিক অনুষ্ঠানের আয়োজন</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <div class="timeline-year" data-translate="year-2005">২০০৫</div>
+                    <h3 data-translate="timeline-2005-title">মাধ্যমিক পর্যায়ে সম্প্রসারণ</h3>
+                    <p data-translate="timeline-2005-desc">মণ্ডপের আয়তন দ্বিগুণ করে বৃহত্তর আয়োজনের সূচনা</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <div class="timeline-year" data-translate="year-2020">২০২০</div>
+                    <h3 data-translate="timeline-2020-title">ডিজিটাল রূপান্তর</h3>
+                    <p data-translate="timeline-2020-desc">প্রথমবারের মত অনলাইন পূজা আয়োজন ও লাইভ স্ট্রিমিং</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Committee Section -->
+        <section class="committee-section">
+            <div class="container">
+                <h2 data-translate="committee-title">বর্তমান কমিটি</h2>
+                <p data-translate="committee-subtitle">২০২৩-২০২৫ মেয়াদের দায়িত্বপ্রাপ্ত সদস্যবৃন্দ</p>
+                
+                <div class="committee-grid">
+                    <div class="committee-card">
+                        <img src="assets/images/committee/president.jpg" alt="সভাপতি" class="committee-photo">
+                        <h3 data-translate="president-name">ড. অরুণ কুমার চক্রবর্তী</h3>
+                        <p data-translate="president-post">সভাপতি</p>
+                    </div>
+                    
+                    <div class="committee-card">
+                        <img src="assets/images/committee/secretary.jpg" alt="সাধারণ সম্পাদক" class="committee-photo">
+                        <h3 data-translate="secretary-name">শ্রী প্রদীপ কুমার সাহা</h3>
+                        <p data-translate="secretary-post">সাধারণ সম্পাদক</p>
+                    </div>
+                    
+                    <div class="committee-card">
+                        <img src="assets/images/committee/treasurer.jpg" alt="কোষাধ্যক্ষ" class="committee-photo">
+                        <h3 data-translate="treasurer-name">শ্রীমতি মালা দেবনাথ</h3>
+                        <p data-translate="treasurer-post">কোষাধ্যক্ষ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Legacy Section -->
+        <section class="legacy-section">
+            <div class="container">
+                <h2 data-translate="legacy-title">আমাদের ঐতিহ্য</h2>
+                <div class="legacy-content">
+                    <img src="assets/images/history/old-photo.jpg" alt="ঐতিহাসিক ছবি" style="max-width:100%; border-radius:8px;">
+                    <p data-translate="legacy-text" style="margin-top:1rem;">
+                        মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা শুধু একটি ধর্মীয় অনুষ্ঠান নয়, 
+                        এটি এই অঞ্চলের সাংস্কৃতিক পরিচয়েরও প্রতীক। প্রজন্ম থেকে প্রজন্মান্তরে 
+                        এই পূজা স্থানীয় বাসিন্দাদের মধ্যে সম্প্রীতির বন্ধন সুদৃঢ় করেছে।
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
     <footer>
-        <p>© ২০২৪ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+        <div class="footer-container">
+            <div class="footer-about">
+                <img src="assets/images/logo-white.png" alt="মিলরোড ঠাকুরবাড়ী লোগো" class="footer-logo">
+                <p data-translate="footer-about">৭২ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 data-translate="quick-links">দ্রুত লিঙ্ক</h3>
+                <a href="index.html" data-translate="home-link">হোম</a>
+                <a href="about.html" data-translate="history-link">ইতিহাস</a>
+                <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+                <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 data-translate="contact-title">যোগাযোগ</h3>
+                <p>১২৩ মিলরোড, কলকাতা - ৭০০০৫০</p>
+                <p>📞 ৯৮৭৬৫৪৩২১০</p>
+                <p>📧 info@milroadthakurbari.com</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p data-translate="copyright-text">© ২০২৪ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি | সকল স্বত্ব সংরক্ষিত</p>
+        </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/languages.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        // Apply translations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLanguage = localStorage.getItem('preferredLanguage') || 'bn';
+            changeLanguage(savedLanguage);
+        });
+        
+        // Language switching function
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+                if ((lang === 'bn' && btn.textContent === 'বাংলা') ||
+                    (lang === 'en' && btn.textContent === 'English') ||
+                    (lang === 'hi' && btn.textContent === 'हिन्दी')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            applyTranslations();
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // RTL handling for Hindi
+            if (lang === 'hi') {
+                document.body.classList.add('rtl');
+            } else {
+                document.body.classList.remove('rtl');
+            }
+        }
+    </script>
 </body>
 </html>
