@@ -3,58 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>যোগাযোগ - মিলরোড ঠাকুরবাড়ী</title>
+    <title data-translate="contact-title">যোগাযোগ - মিলরোড ঠাকুরবাড়ী</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Language Alternatives for SEO -->
+    <link rel="alternate" hreflang="bn" href="https://yourwebsite.com/contact" />
+    <link rel="alternate" hreflang="en" href="https://yourwebsite.com/en/contact" />
+    <link rel="alternate" hreflang="hi" href="https://yourwebsite.com/hi/contact" />
     <style>
-        .contact-form {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #f9f9f9;
-            border-radius: 5px;
-        }
-        .contact-form input, 
-        .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        .contact-info {
+        /* Contact Page Specific Styles */
+        .contact-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('assets/images/contact-bg.jpg') center/cover no-repeat;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            margin: 30px;
+            color: white;
+            position: relative;
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .contact-form {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Hind Siliguri', sans-serif;
+            transition: border 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Hind Siliguri', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .contact-info h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-icon {
+            margin-right: 1rem;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+            z-index: 100;
+        }
+        
+        .language-switcher button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher button:hover, 
+        .language-switcher button.active {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 480px) {
+            .language-switcher button {
+                padding: 3px 6px;
+                font-size: 0.8rem;
+            }
+            
+            .contact-header {
+                height: 30vh;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>যোগাযোগ করুন</h1>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button onclick="changeLanguage('bn')" class="active">বাংলা</button>
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('hi')">हिन्दी</button>
+    </div>
+
+    <!-- Header -->
+    <header class="contact-header">
+        <h1 data-translate="contact-title">যোগাযোগ করুন</h1>
+        <p data-translate="contact-subtitle">আমাদের সাথে যে কোনো প্রয়োজনে যোগাযোগ করুন</p>
     </header>
 
+    <!-- Navigation -->
     <nav>
-        <a href="index.html">হোম</a>
-        <a href="about.html">ইতিহাস</a>
-        <a href="events.html">আয়োজন</a>
-        <a href="gallery.html">গ্যালারি</a>
-        <a href="location.html">অবস্থান</a>
-        <a href="contact.html">যোগাযোগ</a>
+        <div class="nav-container">
+            <a href="index.html" data-translate="home-link">হোম</a>
+            <a href="about.html" data-translate="history-link">ইতিহাস</a>
+            <a href="events.html" data-translate="events-link">আয়োজন</a>
+            <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+            <a href="location.html" data-translate="location-link">অবস্থান</a>
+            <a href="contact.html" class="active" data-translate="contact-link">যোগাযোগ</a>
+            <div class="mobile-menu-btn">☰</div>
+        </div>
     </nav>
 
-    <section class="contact-form">
-        <h2>বার্তা পাঠান</h2>
-        <form>
-            <input type="text" placeholder="আপনার নাম" required>
-            <input type="email" placeholder="ইমেইল" required>
-            <input type="tel" placeholder="ফোন নম্বর">
-            <textarea rows="5" placeholder="আপনার বার্তা" required></textarea>
-            <button type="submit">পাঠান</button>
-        </form>
-    </section>
+    <!-- Main Content -->
+    <main class="contact-container">
+        <!-- Contact Form -->
+        <section class="contact-form">
+            <h2 data-translate="contact-form-title">বার্তা পাঠান</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name" data-translate="name-label">আপনার নাম</label>
+                    <input type="text" id="name" class="form-control" required data-translate="name-placeholder" placeholder="আপনার পুরো নাম">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" data-translate="email-label">ইমেইল</label>
+                    <input type="email" id="email" class="form-control" required data-translate="email-placeholder" placeholder="আপনার ইমেইল ঠিকানা">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone" data-translate="phone-label">ফোন নম্বর</label>
+                    <input type="tel" id="phone" class="form-control" data-translate="phone-placeholder" placeholder="আপনার ফোন নম্বর">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message" data-translate="message-label">আপনার বার্তা</label>
+                    <textarea id="message" class="form-control" required data-translate="message-placeholder" placeholder="আপনার বার্তা এখানে লিখুন"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn" data-translate="submit-btn">পাঠান</button>
+            </form>
+        </section>
 
-    <section class="contact-info">
-        <h2>সরাসরি যোগাযোগ</h2>
-        <p>📞 সাধারণ সম্পাদক: ৯৮৭৬৫৪৩২১০</p>
-        <p>📧 ইমেইল: info@milroadthakurbari.com</p>
-        <p>🏠 ঠিকানা: ১২৩ মিলরোড, কলকাতা - ৭০০০৫০</p>
-    </section>
+        <!-- Contact Information -->
+        <section class="contact-info">
+            <h2 data-translate="direct-contact-title">সরাসরি যোগাযোগ</h2>
+            
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h3 data-translate="address-title">ঠিকানা</h3>
+                        <p>মিলরোড, সেতাবগঞ্জ, বোচাগঞ্জ, দিনাজপুর</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h3 data-translate="phone-title">ফোন</h3>
+                        <p>০১৭০০৬৭৬৬৭৯</p>
+                        <p>০১৭২২৯৮০১৫১</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <h3 data-translate="email-title">ইমেইল</h3>
+                        <p>millroadthakurbarimondob@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">⏰</div>
+                    <div>
+                        <h3 data-translate="hours-title">সময়</h3>
+                        <p data-translate="working-hours">সকাল ৮টা - রাত ১০টা (প্রতিদিন)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 data-translate="social-title">সামাজিক মাধ্যম</h3>
+            <div class="social-links">
+                <a href="#" class="social-link" aria-label="Facebook">📘</a>
+                <a href="#" class="social-link" aria-label="YouTube">📺</a>
+                <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <img src="assets/images/logo-white.png" alt="মিলরোড ঠাকুরবাড়ী লোগো" class="footer-logo">
+                <p data-translate="footer-about">৭২ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 data-translate="quick-links">দ্রুত লিঙ্ক</h3>
+                <a href="index.html" data-translate="home-link">হোম</a>
+                <a href="about.html" data-translate="history-link">ইতিহাস</a>
+                <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+                <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 data-translate="contact-title">যোগাযোগ</h3>
+                <p>মিলরোড, সেতাবগঞ্জ, বোচাগঞ্জ, দিনাজপুর</p>
+                <p>📞 ০১৭০০৬৭৬৬৭৯</p>
+                <p>📞 ০১৭২২৯৮০১৫১</p>
+                <p>📧 millroadthakurbarimondob@gmail.com</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p data-translate="copyright-text">© ২০২৫ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি | সকল স্বত্ব সংরক্ষিত</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/languages.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        // Apply translations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLanguage = localStorage.getItem('preferredLanguage') || 'bn';
+            changeLanguage(savedLanguage);
+            
+            // Form submission handling
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // Here you would normally send the form data to your server
+                    alert(translations['form-success'][currentLanguage] || 'আপনার বার্তা সফলভাবে পাঠানো হয়েছে!');
+                    contactForm.reset();
+                });
+            }
+        });
+        
+        // Language switching function
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+                if ((lang === 'bn' && btn.textContent === 'বাংলা') ||
+                    (lang === 'en' && btn.textContent === 'English') ||
+                    (lang === 'hi' && btn.textContent === 'हिन्दी')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            applyTranslations();
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // RTL handling for Hindi
+            if (lang === 'hi') {
+                document.body.classList.add('rtl');
+            } else {
+                document.body.classList.remove('rtl');
+            }
+        }
+    </script>
 </body>
 </html>
