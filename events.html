@@ -3,28 +3,574 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আয়োজন - মিলরোড ঠাকুরবাড়ী</title>
+    <title data-translate="events-title">আয়োজন - মিলরোড ঠাকুরবাড়ী</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Language Alternatives for SEO -->
+    <link rel="alternate" hreflang="bn" href="https://yourwebsite.com/events" />
+    <link rel="alternate" hreflang="en" href="https://yourwebsite.com/en/events" />
+    <link rel="alternate" hreflang="hi" href="https://yourwebsite.com/hi/events" />
+    <style>
+        /* Events Page Specific Styles */
+        .events-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('assets/images/events-bg.jpg') center/cover no-repeat;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .events-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .event-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .events-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .event-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .event-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .event-card:hover .event-image img {
+            transform: scale(1.05);
+        }
+        
+        .event-content {
+            padding: 1.5rem;
+        }
+        
+        .event-date {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .event-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .event-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .event-description {
+            margin-bottom: 1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .event-btn {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .event-btn:hover {
+            background: var(--secondary-dark);
+        }
+        
+        .upcoming-highlight {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 992px) {
+            .upcoming-highlight {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+            }
+        }
+        
+        .highlight-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .highlight-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .highlight-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .highlight-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .highlight-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+            z-index: 100;
+        }
+        
+        .language-switcher button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher button:hover, 
+        .language-switcher button.active {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .events-header {
+                height: 35vh;
+            }
+            
+            .upcoming-highlight {
+                padding: 1.5rem;
+            }
+            
+            .highlight-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-switcher button {
+                padding: 3px 6px;
+                font-size: 0.8rem;
+            }
+            
+            .events-header {
+                height: 30vh;
+            }
+            
+            .event-filters {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>২০২৪ সালের বিশেষ আয়োজন</h1>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button onclick="changeLanguage('bn')" class="active">বাংলা</button>
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('hi')">हिन्दी</button>
+    </div>
+
+    <!-- Header -->
+    <header class="events-header">
+        <h1 data-translate="events-title">২০২৫ সালের বিশেষ আয়োজন</h1>
+        <p data-translate="events-subtitle">আমাদের সকল কার্যক্রম ও অনুষ্ঠানের তালিকা</p>
     </header>
 
-    <section class="schedule">
-        <h2>কার্যক্রম সূচি</h2>
-        <table>
-            <tr>
-                <th>তারিখ</th>
-                <th>সময়</th>
-                <th>কার্যক্রম</th>
-            </tr>
-            <tr>
-                <td>১০ অক্টোবর</td>
-                <td>সকাল ১০টা</td>
-                <td>মহাস্নান ও প্রাণ প্রতিষ্ঠা</td>
-            </tr>
-        </table>
-    </section>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" data-translate="home-link">হোম</a>
+            <a href="about.html" data-translate="history-link">ইতিহাস</a>
+            <a href="events.html" class="active" data-translate="events-link">আয়োজন</a>
+            <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+            <a href="location.html" data-translate="location-link">অবস্থান</a>
+            <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
+            <div class="mobile-menu-btn">☰</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="events-container">
+        <!-- Highlighted Upcoming Event -->
+        <section class="upcoming-highlight">
+            <div class="highlight-content">
+                <span class="highlight-badge" data-translate="featured-event">প্রধান আয়োজন</span>
+                <h2 class="highlight-title" data-translate="puja-2025-title">শ্রী শ্রী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা ২০২৫</h2>
+                <p class="highlight-description" data-translate="puja-2025-desc">
+                    আমাদের ৭৩তম বারোয়ারী পূজা উদযাপন। এবারের পূজা হবে আরও বর্ণাঢ্য আয়োজনে 
+                    সাথে থাকবে সাংস্কৃতিক অনুষ্ঠান, ভোগ বিতরণ ও বিশেষ আলোকসজ্জা।
+                </p>
+                <div class="event-meta">
+                    <div class="event-meta-item">
+                        <span>📅</span>
+                        <span data-translate="puja-date">১০-১৪ অক্টোবর ২০২৫</span>
+                    </div>
+                    <div class="event-meta-item">
+                        <span>⏰</span>
+                        <span data-translate="puja-time">সকাল ৮টা - রাত ১০টা</span>
+                    </div>
+                </div>
+                <a href="#puja-schedule" class="event-btn" data-translate="view-schedule-btn">সময়সূচী দেখুন</a>
+            </div>
+            <div class="highlight-image">
+                <img src="assets/images/events/puja-2024.jpg" alt="২০২৪ সালের পূজার ছবি" data-translate="puja-image-alt">
+            </div>
+        </section>
+
+        <!-- Event Filters -->
+        <div class="event-filters">
+            <button class="filter-btn active" data-filter="all" data-translate="filter-all">সব আয়োজন</button>
+            <button class="filter-btn" data-filter="puja" data-translate="filter-puja">পূজা</button>
+            <button class="filter-btn" data-filter="cultural" data-translate="filter-cultural">সাংস্কৃতিক</button>
+            <button class="filter-btn" data-filter="social" data-translate="filter-social">সামাজিক</button>
+            <button class="filter-btn" data-filter="other" data-translate="filter-other">অন্যান্য</button>
+        </div>
+
+        <!-- Events Grid -->
+        <div class="events-grid" id="eventsGrid">
+            <!-- Event 1 -->
+            <div class="event-card" data-category="puja">
+                <div class="event-image">
+                    <img src="assets/images/events/mahasnan.jpg" alt="মহাস্নান" data-translate="mahasnan-image-alt">
+                </div>
+                <div class="event-content">
+                    <span class="event-date" data-translate="mahasnan-date">১০ অক্টোবর ২০২৫</span>
+                    <h3 class="event-title" data-translate="mahasnan-title">মহাস্নান ও প্রাণ প্রতিষ্ঠা</h3>
+                    <div class="event-meta">
+                        <div class="event-meta-item">
+                            <span>⏰</span>
+                            <span data-translate="mahasnan-time">সকাল ১০টা</span>
+                        </div>
+                        <div class="event-meta-item">
+                            <span>📍</span>
+                            <span data-translate="mahasnan-location">মূল মণ্ডপ</span>
+                        </div>
+                    </div>
+                    <p class="event-description" data-translate="mahasnan-desc">
+                        পূজার আনুষ্ঠানিক সূচনা হবে মহাস্নান ও প্রাণ প্রতিষ্ঠার মাধ্যমে। 
+                        এই দিনে সকল ভক্তদের জন্য বিশেষ প্রসাদ বিতরণ করা হবে।
+                    </p>
+                    <a href="#" class="event-btn" data-translate="details-btn">বিস্তারিত</a>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-card" data-category="cultural">
+                <div class="event-image">
+                    <img src="assets/images/events/cultural.jpg" alt="সাংস্কৃতিক অনুষ্ঠান" data-translate="cultural-image-alt">
+                </div>
+                <div class="event-content">
+                    <span class="event-date" data-translate="cultural-date">১১ অক্টোবর ২০২৫</span>
+                    <h3 class="event-title" data-translate="cultural-title">সাংস্কৃতিক সন্ধ্যা</h3>
+                    <div class="event-meta">
+                        <div class="event-meta-item">
+                            <span>⏰</span>
+                            <span data-translate="cultural-time">সন্ধ্যা ৬টা</span>
+                        </div>
+                        <div class="event-meta-item">
+                            <span>📍</span>
+                            <span data-translate="cultural-location">মণ্ডপ মঞ্চ</span>
+                        </div>
+                    </div>
+                    <p class="event-description" data-translate="cultural-desc">
+                        স্থানীয় শিল্পীদের অংশগ্রহণে সাংস্কৃতিক অনুষ্ঠান। নৃত্য, সংগীত 
+                        ও নাটক পরিবেশিত হবে। সকলের জন্য উন্মুক্ত।
+                    </p>
+                    <a href="#" class="event-btn" data-translate="details-btn">বিস্তারিত</a>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card" data-category="puja">
+                <div class="event-image">
+                    <img src="assets/images/events/sandhya.jpg" alt="সন্ধ্যা আরতি" data-translate="sandhya-image-alt">
+                </div>
+                <div class="event-content">
+                    <span class="event-date" data-translate="sandhya-date">১২ অক্টোবর ২০২৫</span>
+                    <h3 class="event-title" data-translate="sandhya-title">সন্ধ্যা আরতি</h3>
+                    <div class="event-meta">
+                        <div class="event-meta-item">
+                            <span>⏰</span>
+                            <span data-translate="sandhya-time">সন্ধ্যা ৭টা</span>
+                        </div>
+                        <div class="event-meta-item">
+                            <span>📍</span>
+                            <span data-translate="sandhya-location">মূল মণ্ডপ</span>
+                        </div>
+                    </div>
+                    <p class="event-description" data-translate="sandhya-desc">
+                        বিশেষ সন্ধ্যা আরতি ও আলোকসজ্জা। এই দিনে সম্মিলিত আরতিতে 
+                        অংশগ্রহণের জন্য সকল ভক্তদের আমন্ত্রণ।
+                    </p>
+                    <a href="#" class="event-btn" data-translate="details-btn">বিস্তারিত</a>
+                </div>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="event-card" data-category="social">
+                <div class="event-image">
+                    <img src="assets/images/events/annadan.jpg" alt="অন্নদান" data-translate="annadan-image-alt">
+                </div>
+                <div class="event-content">
+                    <span class="event-date" data-translate="annadan-date">১৩ অক্টোবর ২০২৫</span>
+                    <h3 class="event-title" data-translate="annadan-title">অন্নদান কর্মসূচি</h3>
+                    <div class="event-meta">
+                        <div class="event-meta-item">
+                            <span>⏰</span>
+                            <span data-translate="annadan-time">দুপুর ১২টা</span>
+                        </div>
+                        <div class="event-meta-item">
+                            <span>📍</span>
+                            <span data-translate="annadan-location">মণ্ডপ প্রাঙ্গণ</span>
+                        </div>
+                    </div>
+                    <p class="event-description" data-translate="annadan-desc">
+                        দরিদ্র ও অসহায় মানুষদের জন্য অন্নদান কর্মসূচি। এই দিনে 
+                        ৫০০ জনকে বিনামূল্যে খাবার পরিবেশন করা হবে।
+                    </p>
+                    <a href="#" class="event-btn" data-translate="details-btn">বিস্তারিত</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Puja Schedule -->
+        <section id="puja-schedule" class="puja-schedule" style="margin-top: 4rem;">
+            <h2 data-translate="schedule-title">পূজা সময়সূচী ২০২৫</h2>
+            <div class="schedule-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th data-translate="schedule-date">তারিখ</th>
+                            <th data-translate="schedule-time">সময়</th>
+                            <th data-translate="schedule-event">আয়োজন</th>
+                            <th data-translate="schedule-location">স্থান</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-translate="day1-date">১০ অক্টোবর</td>
+                            <td data-translate="day1-time">সকাল ১০টা</td>
+                            <td data-translate="day1-event">মহাস্নান ও প্রাণ প্রতিষ্ঠা</td>
+                            <td data-translate="day1-location">মূল মণ্ডপ</td>
+                        </tr>
+                        <tr>
+                            <td data-translate="day2-date">১১ অক্টোবর</td>
+                            <td data-translate="day2-time">সকাল ৯টা - সন্ধ্যা ৯টা</td>
+                            <td data-translate="day2-event">নিত্য পূজা ও ভোগ বিতরণ</td>
+                            <td data-translate="day2-location">মূল মণ্ডপ</td>
+                        </tr>
+                        <tr>
+                            <td data-translate="day3-date">১২ অক্টোবর</td>
+                            <td data-translate="day3-time">সন্ধ্যা ৭টা</td>
+                            <td data-translate="day3-event">সন্ধ্যা আরতি ও আলোকসজ্জা</td>
+                            <td data-translate="day3-location">মণ্ডপ প্রাঙ্গণ</td>
+                        </tr>
+                        <tr>
+                            <td data-translate="day4-date">১৩ অক্টোবর</td>
+                            <td data-translate="day4-time">দুপুর ১২টা</td>
+                            <td data-translate="day4-event">অন্নদান কর্মসূচি</td>
+                            <td data-translate="day4-location">মণ্ডপ প্রাঙ্গণ</td>
+                        </tr>
+                        <tr>
+                            <td data-translate="day5-date">১৪ অক্টোবর</td>
+                            <td data-translate="day5-time">সকাল ১১টা</td>
+                            <td data-translate="day5-event">প্রতিমা বিসর্জন</td>
+                            <td data-translate="day5-location">নিকটবর্তী নদী</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <img src="assets/images/logo-white.png" alt="মিলরোড ঠাকুরবাড়ী লোগো" class="footer-logo">
+                <p data-translate="footer-about">৭২ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 data-translate="quick-links">দ্রুত লিঙ্ক</h3>
+                <a href="index.html" data-translate="home-link">হোম</a>
+                <a href="about.html" data-translate="history-link">ইতিহাস</a>
+                <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+                <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 data-translate="contact-title">যোগাযোগ</h3>
+                <p>মিলরোড, সেতাবগঞ্জ, বোচাগঞ্জ, দিনাজপুর</p>
+                <p>📞 ০১৭০০৬৭৬৬৭৯</p>
+                <p>📞 ০১৭২২৯৮০১৫১</p>
+                <p>📧 millroadthakurbarimondob@gmail.com</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p data-translate="copyright-text">© ২০২৫ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি | সকল স্বত্ব সংরক্ষিত</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/languages.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        // Apply translations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLanguage = localStorage.getItem('preferredLanguage') || 'bn';
+            changeLanguage(savedLanguage);
+            
+            // Event filtering functionality
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const eventCards = document.querySelectorAll('.event-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    // Filter events
+                    eventCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+        
+        // Language switching function
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+                if ((lang === 'bn' && btn.textContent === 'বাংলা') ||
+                    (lang === 'en' && btn.textContent === 'English') ||
+                    (lang === 'hi' && btn.textContent === 'हिन्दी')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            applyTranslations();
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // RTL handling for Hindi
+            if (lang === 'hi') {
+                document.body.classList.add('rtl');
+            } else {
+                document.body.classList.remove('rtl');
+            }
+        }
+    </script>
 </body>
 </html>
