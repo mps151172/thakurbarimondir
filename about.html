@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Language Alternatives for SEO -->
+    <link rel="alternate" hreflang="bn" href="https://yourwebsite.com/about" />
+    <link rel="alternate" hreflang="en" href="https://yourwebsite.com/en/about" />
+    <link rel="alternate" hreflang="hi" href="https://yourwebsite.com/hi/about" />
     <style>
         /* About Page Specific Styles */
         .about-header {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('../assets/images/about-bg.jpg') center/cover no-repeat;
+                        url('assets/images/about-bg.jpg') center/cover no-repeat;
             height: 50vh;
             display: flex;
             flex-direction: column;
@@ -19,6 +23,7 @@
             align-items: center;
             text-align: center;
             color: white;
+            position: relative;
         }
         
         .timeline {
@@ -117,6 +122,64 @@
             border: 3px solid var(--primary-color);
         }
         
+        .legacy-section {
+            padding: 3rem 1rem;
+            background: var(--light-bg);
+        }
+        
+        .legacy-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .legacy-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .legacy-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .legacy-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+            z-index: 100;
+        }
+        
+        .language-switcher button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher button:hover, 
+        .language-switcher button.active {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
         @media (max-width: 768px) {
             .timeline::after {
                 left: 31px;
@@ -139,6 +202,25 @@
             
             .left::after, .right::after {
                 left: 18px;
+            }
+            
+            .legacy-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-header {
+                height: 40vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-switcher button {
+                padding: 3px 6px;
+                font-size: 0.8rem;
+            }
+            
+            .committee-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -186,7 +268,7 @@
                     <div class="timeline-year" data-translate="year-1952">১৯৫২</div>
                     <h3 data-translate="timeline-1952-title">প্রতিষ্ঠা পর্ব</h3>
                     <p data-translate="timeline-1952-desc">স্থানীয় বাসিন্দাদের উদ্যোগে প্রতিষ্ঠিত হয় মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
-                    <img src="assets/images/history/1952.jpg" alt="প্রতিষ্ঠাকালীন ছবি" style="width:100%; margin-top:10px;">
+                    <img src="assets/images/history/1952.jpg" alt="প্রতিষ্ঠাকালীন ছবি" class="timeline-image">
                 </div>
             </div>
             
@@ -256,12 +338,22 @@
             <div class="container">
                 <h2 data-translate="legacy-title">আমাদের ঐতিহ্য</h2>
                 <div class="legacy-content">
-                    <img src="assets/images/history/old-photo.jpg" alt="ঐতিহাসিক ছবি" style="max-width:100%; border-radius:8px;">
-                    <p data-translate="legacy-text" style="margin-top:1rem;">
-                        মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা শুধু একটি ধর্মীয় অনুষ্ঠান নয়, 
-                        এটি এই অঞ্চলের সাংস্কৃতিক পরিচয়েরও প্রতীক। প্রজন্ম থেকে প্রজন্মান্তরে 
-                        এই পূজা স্থানীয় বাসিন্দাদের মধ্যে সম্প্রীতির বন্ধন সুদৃঢ় করেছে।
-                    </p>
+                    <div class="legacy-image">
+                        <img src="assets/images/history/old-photo.jpg" alt="ঐতিহাসিক ছবি">
+                    </div>
+                    <div class="legacy-text">
+                        <p data-translate="legacy-text">
+                            মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা শুধু একটি ধর্মীয় অনুষ্ঠান নয়, 
+                            এটি এই অঞ্চলের সাংস্কৃতিক পরিচয়েরও প্রতীক। প্রজন্ম থেকে প্রজন্মান্তরে 
+                            এই পূজা স্থানীয় বাসিন্দাদের মধ্যে সম্প্রীতির বন্ধন সুদৃঢ় করেছে।
+                        </p>
+                        <p data-translate="legacy-text-2">
+                            আমাদের এই প্রতিষ্ঠান শুধু ধর্মীয় কার্যক্রমেই নয়, সামাজিক উন্নয়ন ও 
+                            সাংস্কৃতিক সংরক্ষণেও গুরুত্বপূর্ণ ভূমিকা পালন করে আসছে। প্রতি বছর 
+                            আমরা স্থানীয় শিক্ষার্থীদের জন্য বৃত্তি প্রদান এবং সাংস্কৃতিক কর্মশালার 
+                            আয়োজন করে থাকি।
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -285,9 +377,10 @@
             
             <div class="footer-contact">
                 <h3 data-translate="contact-title">যোগাযোগ</h3>
-                <p>মিলরোড,সেতাবগঞ্জ,বোচাগঞ্জ,দিনাজপুর</p>
-                <p>📞 ৯৮৭৬৫৪৩২১০</p>
-                <p>📧 info@milroadthakurbari.com</p>
+                <p>মিলরোড, সেতাবগঞ্জ, বোচাগঞ্জ, দিনাজপুর</p>
+                <p>📞 ০১৭০০৬৭৬৬৭৯</p>
+                <p>📞 ০১৭২২৯৮০১৫১</p>
+                <p>📧 millroadthakurbarimondob@gmail.com</p>
             </div>
         </div>
         
