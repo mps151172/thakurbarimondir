@@ -3,14 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>গ্যালারি - মিলরোড ঠাকুরবাড়ী</title>
+    <title data-translate="gallery-title">গ্যালারি - মিলরোড ঠাকুরবাড়ী</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Lightbox CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <!-- Language Alternatives for SEO -->
+    <link rel="alternate" hreflang="bn" href="https://yourwebsite.com/gallery" />
+    <link rel="alternate" hreflang="en" href="https://yourwebsite.com/en/gallery" />
+    <link rel="alternate" hreflang="hi" href="https://yourwebsite.com/hi/gallery" />
     <style>
+        /* Gallery Page Specific Styles */
+        .gallery-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('assets/images/gallery-bg.jpg') center/cover no-repeat;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
         .gallery-container {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .gallery-intro {
+            text-align: center;
+            margin-bottom: 2rem;
         }
         
         .gallery-categories {
@@ -18,25 +44,29 @@
             gap: 1rem;
             margin-bottom: 2rem;
             flex-wrap: wrap;
+            justify-content: center;
         }
         
         .category-btn {
-            background: #e63946;
-            color: white;
+            background: #f0f0f0;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-family: 'Hind Siliguri', sans-serif;
+            font-weight: 600;
         }
         
         .category-btn:hover, .category-btn.active {
-            background: #c1121f;
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
         }
         
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
         }
         
@@ -44,17 +74,20 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
         }
         
         .gallery-item:hover {
             transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
         
         .gallery-item a {
             display: block;
-            height: 200px;
+            height: 250px;
             overflow: hidden;
+            position: relative;
         }
         
         .gallery-item img {
@@ -69,86 +102,407 @@
         }
         
         .image-caption {
-            padding: 0.8rem;
-            background: white;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .image-caption {
+            transform: translateY(0);
+        }
+        
+        .load-more {
             text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .load-more-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .load-more-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        /* Year Selection */
+        .year-selection {
+            display: flex;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .year-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .year-btn:hover, .year-btn.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+            z-index: 100;
+        }
+        
+        .language-switcher button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher button:hover, 
+        .language-switcher button.active {
+            background: var(--primary-color);
+            transform: translateY(-2px);
         }
         
         @media (max-width: 768px) {
+            .gallery-header {
+                height: 35vh;
+            }
+            
             .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 1rem;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
             
             .gallery-item a {
-                height: 150px;
+                height: 200px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-switcher button {
+                padding: 3px 6px;
+                font-size: 0.8rem;
+            }
+            
+            .gallery-header {
+                height: 30vh;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-btn, .year-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>মিলরোড ঠাকুরবাড়ীর গ্যালারি</h1>
-    </header>
-
-    <nav>
-        <a href="index.html">হোম</a>
-        <a href="about.html">ইতিহাস</a>
-        <a href="events.html">আয়োজন</a>
-        <a href="gallery.html" class="active">গ্যালারি</a>
-        <a href="location.html">অবস্থান</a>
-        <a href="contact.html">যোগাযোগ</a>
-    </nav>
-
-    <div class="gallery-container">
-        <div class="gallery-categories">
-            <button class="category-btn active" data-category="all">সব ছবি</button>
-            <button class="category-btn" data-category="2024">২০২৪ সালের মণ্ডপ</button>
-            <button class="category-btn" data-category="construction">নির্মাণ পর্যায়</button>
-            <button class="category-btn" data-category="history">ঐতিহাসিক ছবি</button>
-        </div>
-        
-        <div class="gallery-grid" id="galleryGrid">
-            <!-- ডাইনামিকভাবে ছবি লোড হবে -->
-            <div class="loading">ছবি লোড হচ্ছে...</div>
-        </div>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button onclick="changeLanguage('bn')" class="active">বাংলা</button>
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('hi')">हिन्दी</button>
     </div>
 
+    <!-- Header -->
+    <header class="gallery-header">
+        <h1 data-translate="gallery-title">মিলরোড ঠাকুরবাড়ীর গ্যালারি</h1>
+        <p data-translate="gallery-subtitle">আমাদের স্মরণীয় মুহূর্তগুলোর সংগ্রহ</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" data-translate="home-link">হোম</a>
+            <a href="about.html" data-translate="history-link">ইতিহাস</a>
+            <a href="events.html" data-translate="events-link">আয়োজন</a>
+            <a href="gallery.html" class="active" data-translate="gallery-link">গ্যালারি</a>
+            <a href="location.html" data-translate="location-link">অবস্থান</a>
+            <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
+            <div class="mobile-menu-btn">☰</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="gallery-container">
+        <div class="gallery-intro">
+            <h2 data-translate="gallery-intro-title">আমাদের সেরা মুহূর্তসমূহ</h2>
+            <p data-translate="gallery-intro-text">গত ৭০ বছরের ঐতিহ্যবাহী পূজা ও অনুষ্ঠানের স্মৃতি চিত্র</p>
+        </div>
+        
+        <!-- Year Selection -->
+        <div class="year-selection">
+            <button class="year-btn active" data-year="all" data-translate="all-years">সব বছর</button>
+            <button class="year-btn" data-year="2025" data-translate="year-2025">২০২৫</button>
+            <button class="year-btn" data-year="2024" data-translate="year-2024">২০২৪</button>
+            <button class="year-btn" data-year="2023" data-translate="year-2023">২০২৩</button>
+            <button class="year-btn" data-year="historical" data-translate="historical">ঐতিহাসিক</button>
+        </div>
+        
+        <!-- Category Filter -->
+        <div class="gallery-categories">
+            <button class="category-btn active" data-category="all" data-translate="all-photos">সব ছবি</button>
+            <button class="category-btn" data-category="puja" data-translate="puja-photos">পূজা</button>
+            <button class="category-btn" data-category="cultural" data-translate="cultural-photos">সাংস্কৃতিক</button>
+            <button class="category-btn" data-category="construction" data-translate="construction-photos">নির্মাণ</button>
+            <button class="category-btn" data-category="people" data-translate="people-photos">লোকজন</button>
+        </div>
+        
+        <!-- Gallery Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Gallery Item 1 -->
+            <div class="gallery-item" data-year="2025" data-category="puja">
+                <a href="assets/images/gallery/puja-2025-1.jpg" data-lightbox="gallery" data-title="২০২৫ পূজা - মহাস্নান">
+                    <img src="assets/images/gallery/thumbs/puja-2025-1.jpg" alt="২০২৫ পূজা - মহাস্নান" data-translate="puja-2025-1-alt">
+                    <div class="image-caption" data-translate="puja-2025-1-caption">২০২৫ পূজার মহাস্নান অনুষ্ঠান</div>
+                </a>
+            </div>
+            
+            <!-- Gallery Item 2 -->
+            <div class="gallery-item" data-year="2025" data-category="cultural">
+                <a href="assets/images/gallery/cultural-2025-1.jpg" data-lightbox="gallery" data-title="২০২৫ সাংস্কৃতিক অনুষ্ঠান">
+                    <img src="assets/images/gallery/thumbs/cultural-2025-1.jpg" alt="২০২৫ সাংস্কৃতিক অনুষ্ঠান" data-translate="cultural-2025-1-alt">
+                    <div class="image-caption" data-translate="cultural-2025-1-caption">২০২৫ সাংস্কৃতিক সন্ধ্যা</div>
+                </a>
+            </div>
+            
+            <!-- Gallery Item 3 -->
+            <div class="gallery-item" data-year="2024" data-category="puja">
+                <a href="assets/images/gallery/puja-2024-1.jpg" data-lightbox="gallery" data-title="২০২৪ পূজা - আরতি">
+                    <img src="assets/images/gallery/thumbs/puja-2024-1.jpg" alt="২০২৪ পূজা - আরতি" data-translate="puja-2024-1-alt">
+                    <div class="image-caption" data-translate="puja-2024-1-caption">২০২৪ সন্ধ্যা আরতি</div>
+                </a>
+            </div>
+            
+            <!-- Gallery Item 4 -->
+            <div class="gallery-item" data-year="2024" data-category="people">
+                <a href="assets/images/gallery/people-2024-1.jpg" data-lightbox="gallery" data-title="২০২৪ ভক্ত সমাগম">
+                    <img src="assets/images/gallery/thumbs/people-2024-1.jpg" alt="২০২৪ ভক্ত সমাগম" data-translate="people-2024-1-alt">
+                    <div class="image-caption" data-translate="people-2024-1-caption">২০২৪ পূজায় ভক্ত সমাগম</div>
+                </a>
+            </div>
+            
+            <!-- Gallery Item 5 -->
+            <div class="gallery-item" data-year="2023" data-category="construction">
+                <a href="assets/images/gallery/construction-2023-1.jpg" data-lightbox="gallery" data-title="২০২৩ মণ্ডপ নির্মাণ">
+                    <img src="assets/images/gallery/thumbs/construction-2023-1.jpg" alt="২০২৩ মণ্ডপ নির্মাণ" data-translate="construction-2023-1-alt">
+                    <div class="image-caption" data-translate="construction-2023-1-caption">২০২৩ মণ্ডপ নির্মাণ কাজ</div>
+                </a>
+            </div>
+            
+            <!-- Gallery Item 6 -->
+            <div class="gallery-item" data-year="2023" data-category="cultural">
+                <a href="assets/images/gallery/cultural-2023-1.jpg" data-lightbox="gallery" data-title="২০২৩ নৃত্য পরিবেশনা">
+                    <img src="assets/images/gallery/thumbs/cultural-2023-1.jpg" alt="২০২৩ নৃত্য পরিবেশনা" data-translate="cultural-2023-1-alt">
+                    <div class="image-caption" data-translate="cultural-2023-1-caption">২০২৩ নৃত্য অনুষ্ঠান</div>
+                </a>
+            </div>
+            
+            <!-- Gallery Item 7 -->
+            <div class="gallery-item" data-year="historical" data-category="puja">
+                <a href="assets/images/gallery/historical-1.jpg" data-lightbox="gallery" data-title="১৯৮০ সালের পূজা">
+                    <img src="assets/images/gallery/thumbs/historical-1.jpg" alt="১৯৮০ সালের পূজা" data-translate="historical-1-alt">
+                    <div class="image-caption" data-translate="historical-1-caption">১৯৮০ সালের পূজার ছবি</div>
+                </a>
+            </div>
+            
+            <!-- Gallery Item 8 -->
+            <div class="gallery-item" data-year="historical" data-category="people">
+                <a href="assets/images/gallery/historical-2.jpg" data-lightbox="gallery" data-title="১৯৯৫ সালের কমিটি">
+                    <img src="assets/images/gallery/thumbs/historical-2.jpg" alt="১৯৯৫ সালের কমিটি" data-translate="historical-2-alt">
+                    <div class="image-caption" data-translate="historical-2-caption">১৯৯৫ সালের পূজা কমিটি</div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="load-more">
+            <button class="load-more-btn" id="loadMore" data-translate="load-more">আরও ছবি দেখুন</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
     <footer>
-        <p>© ২০২৪ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+        <div class="footer-container">
+            <div class="footer-about">
+                <img src="assets/images/logo-white.png" alt="মিলরোড ঠাকুরবাড়ী লোগো" class="footer-logo">
+                <p data-translate="footer-about">৭২ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 data-translate="quick-links">দ্রুত লিঙ্ক</h3>
+                <a href="index.html" data-translate="home-link">হোম</a>
+                <a href="about.html" data-translate="history-link">ইতিহাস</a>
+                <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+                <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 data-translate="contact-title">যোগাযোগ</h3>
+                <p>মিলরোড, সেতাবগঞ্জ, বোচাগঞ্জ, দিনাজপুর</p>
+                <p>📞 ০১৭০০৬৭৬৬৭৯</p>
+                <p>📞 ০১৭২২৯৮০১৫১</p>
+                <p>📧 millroadthakurbarimondob@gmail.com</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p data-translate="copyright-text">© ২০২৫ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি | সকল স্বত্ব সংরক্ষিত</p>
+        </div>
     </footer>
 
-    <!-- Lightbox JS -->
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-    
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    
-    <!-- গ্যালারি স্ক্রিপ্ট -->
-    <script src="assets/js/gallery.js"></script>
+    <script src="assets/js/languages.js"></script>
+    <script src="assets/js/main.js"></script>
     
     <script>
-        // Firebase কনফিগারেশন
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "your-project.firebaseapp.com",
-            databaseURL: "https://your-project.firebaseio.com",
-            projectId: "your-project",
-            storageBucket: "your-project.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-        
-        // Firebase ইনিশিয়ালাইজ
-        firebase.initializeApp(firebaseConfig);
-        
-        // Lightbox কনফিগারেশন
+        // Initialize Lightbox with Bengali text
         lightbox.option({
             'resizeDuration': 200,
             'wrapAround': true,
-            'albumLabel': "ছবি %1 of %2"
+            'albumLabel': 'ছবি %1 of %2',
+            'alwaysShowNavOnTouchDevices': true
         });
+        
+        // Apply translations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLanguage = localStorage.getItem('preferredLanguage') || 'bn';
+            changeLanguage(savedLanguage);
+            
+            // Filter functionality
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const yearButtons = document.querySelectorAll('.year-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const loadMoreBtn = document.getElementById('loadMore');
+            let visibleItems = 8;
+            
+            // Category filter
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    filterGallery();
+                });
+            });
+            
+            // Year filter
+            yearButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    yearButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    filterGallery();
+                });
+            });
+            
+            // Load more functionality
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    visibleItems += 8;
+                    filterGallery(true);
+                    
+                    // Hide button if all items are visible
+                    const totalItems = document.querySelectorAll('.gallery-item').length;
+                    if (visibleItems >= totalItems) {
+                        loadMoreBtn.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Filter gallery function
+            function filterGallery(keepVisible = false) {
+                const activeCategory = document.querySelector('.category-btn.active').dataset.category;
+                const activeYear = document.querySelector('.year-btn.active').dataset.year;
+                let shownItems = 0;
+                
+                galleryItems.forEach((item, index) => {
+                    const itemCategory = item.dataset.category;
+                    const itemYear = item.dataset.year;
+                    
+                    const categoryMatch = activeCategory === 'all' || itemCategory === activeCategory;
+                    const yearMatch = activeYear === 'all' || itemYear === activeYear;
+                    
+                    if (categoryMatch && yearMatch) {
+                        if (keepVisible || shownItems < visibleItems) {
+                            item.style.display = 'block';
+                            shownItems++;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide load more button
+                if (loadMoreBtn) {
+                    const totalVisible = document.querySelectorAll('.gallery-item[style="display: block"]').length;
+                    const totalItems = document.querySelectorAll('.gallery-item').length;
+                    
+                    if (totalVisible >= totalItems) {
+                        loadMoreBtn.style.display = 'none';
+                    } else {
+                        loadMoreBtn.style.display = 'inline-block';
+                    }
+                }
+            }
+            
+            // Initial filter
+            filterGallery();
+        });
+        
+        // Language switching function
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+                if ((lang === 'bn' && btn.textContent === 'বাংলা') ||
+                    (lang === 'en' && btn.textContent === 'English') ||
+                    (lang === 'hi' && btn.textContent === 'हिन्दी')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            applyTranslations();
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // RTL handling for Hindi
+            if (lang === 'hi') {
+                document.body.classList.add('rtl');
+            } else {
+                document.body.classList.remove('rtl');
+            }
+        }
     </script>
 </body>
 </html>
