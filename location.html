@@ -3,87 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>অবস্থান - মিলরোড ঠাকুরবাড়ী</title>
+    <title data-translate="location-title">অবস্থান - মিলরোড ঠাকুরবাড়ী</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Language Alternatives for SEO -->
+    <link rel="alternate" hreflang="bn" href="https://yourwebsite.com/location" />
+    <link rel="alternate" hreflang="en" href="https://yourwebsite.com/en/location" />
+    <link rel="alternate" hreflang="hi" href="https://yourwebsite.com/hi/location" />
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=places" async defer></script>
     <style>
-        :root {
-            --primary-color: #007bff;
-            --secondary-color: #28a745;
+        /* Location Page Specific Styles */
+        .location-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('assets/images/location-bg.jpg') center/cover no-repeat;
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
         }
+        
         .location-container {
             max-width: 1200px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
-        .map-container {
+        
+        .map-section {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
             margin-top: 2rem;
         }
+        
         @media (min-width: 768px) {
-            .map-container {
+            .map-section {
                 grid-template-columns: 2fr 1fr;
             }
         }
-        .static-map {
+        
+        #map {
+            height: 500px;
             width: 100%;
-            height: 400px;
-            border: 1px solid #ddd;
             border-radius: 8px;
-            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
         }
+        
         .location-info {
             background: #f8f9fa;
-            padding: 1.5rem;
+            padding: 2rem;
             border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+        
+        .info-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-item h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
         .directions-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             margin-top: 1rem;
             background: var(--secondary-color);
             color: white;
             padding: 0.8rem 1.5rem;
             border-radius: 4px;
             text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .directions-btn:hover {
+            background: var(--secondary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .transport-options {
+            margin-top: 2rem;
+        }
+        
+        .transport-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .transport-card h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Language Switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 5px;
+            z-index: 100;
+        }
+        
+        .language-switcher button {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .language-switcher button:hover, 
+        .language-switcher button.active {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            #map {
+                height: 400px;
+            }
+            
+            .location-header {
+                height: 35vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .language-switcher button {
+                padding: 3px 6px;
+                font-size: 0.8rem;
+            }
+            
+            .location-header {
+                height: 30vh;
+            }
+            
+            #map {
+                height: 350px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>মিলরোড ঠাকুরবাড়ী মণ্ডপের অবস্থান</h1>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button onclick="changeLanguage('bn')" class="active">বাংলা</button>
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('hi')">हिन्दी</button>
+    </div>
+
+    <!-- Header -->
+    <header class="location-header">
+        <h1 data-translate="location-title">আমাদের অবস্থান</h1>
+        <p data-translate="location-subtitle">কিভাবে আমাদের মণ্ডপে পৌঁছাবেন</p>
     </header>
+
+    <!-- Navigation -->
     <nav>
-        <a href="index.html">হোম</a>
-        <a href="about.html">ইতিহাস</a>
-        <a href="events.html">আয়োজন</a>
-        <a href="gallery.html">গ্যালারি</a>
-        <a href="location.html" class="active">অবস্থান</a>
-        <a href="contact.html">যোগাযোগ</a>
+        <div class="nav-container">
+            <a href="index.html" data-translate="home-link">হোম</a>
+            <a href="about.html" data-translate="history-link">ইতিহাস</a>
+            <a href="events.html" data-translate="events-link">আয়োজন</a>
+            <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+            <a href="location.html" class="active" data-translate="location-link">অবস্থান</a>
+            <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
+            <div class="mobile-menu-btn">☰</div>
+        </div>
     </nav>
-    <div class="location-container">
-        <h2>আমাদের ঠিকানা</h2>
-        <p>১২৩ মিলরোড, কলকাতা - ৭০০০৫০, পশ্চিমবঙ্গ, ভারত</p>
-        <div class="map-container">
+
+    <!-- Main Content -->
+    <main class="location-container">
+        <h2 data-translate="address-title">আমাদের ঠিকানা</h2>
+        <p data-translate="full-address">মিলরোড, সেতাবগঞ্জ, বোচাগঞ্জ, দিনাজপুর</p>
+        
+        <div class="map-section">
             <div>
-                <img src="assets/images/map-fallback.jpg" alt="মিলরোড ঠাকুরবাড়ী মানচিত্র" class="static-map">
-                <a href="https://www.google.com/maps/dir//22.5726,88.3639" target="_blank" class="directions-btn">
-                   🗺️ দিকনির্দেশনা পান
+                <div id="map"></div>
+                <a href="https://www.google.com/maps/dir//25.6519,88.6632" target="_blank" class="directions-btn" data-translate="directions-btn">
+                    <span>🗺️</span>
+                    <span>দিকনির্দেশনা পান</span>
                 </a>
             </div>
+            
             <div class="location-info">
-                <h3>গুরুত্বপূর্ণ তথ্য</h3>
-                <ul>
-                    <li>⏰ সময়: সকাল ৮টা - রাত ১০টা</li>
-                    <li>🅿️ পার্কিং: মণ্ডপের পিছনে ২০০ গজ</li>
-                    <li>🚻 টয়লেট: মণ্ডপের উত্তর পাশে</li>
-                    <li>♿ প্রতিবন্ধী প্রবেশাধিকার: হ্যাঁ</li>
-                </ul>
+                <div class="info-item">
+                    <h3><span>📍</span> <span data-translate="location-info-title">অবস্থান তথ্য</span></h3>
+                    <p data-translate="location-details">মিলরোড এলাকার কেন্দ্রস্থলে অবস্থিত, সেতাবগঞ্জ বাজারের পশ্চিম পাশে</p>
+                </div>
+                
+                <div class="info-item">
+                    <h3><span>⏰</span> <span data-translate="timing-title">খোলার সময়</span></h3>
+                    <p data-translate="opening-hours">সকাল ৮টা - রাত ১০টা (প্রতিদিন)</p>
+                </div>
+                
+                <div class="info-item">
+                    <h3><span>🅿️</span> <span data-translate="parking-title">পার্কিং</span></h3>
+                    <p data-translate="parking-info">মণ্ডপের পিছনে ২০০ গজ দূরত্বে নির্ধারিত পার্কিং স্থান</p>
+                </div>
+                
+                <div class="info-item">
+                    <h3><span>♿</span> <span data-translate="accessibility-title">প্রতিবন্ধী প্রবেশাধিকার</span></h3>
+                    <p data-translate="accessibility-info">হ্যাঁ, র্যাম্প ও বিশেষ শৌচালয় সুবিধা available</p>
+                </div>
             </div>
         </div>
-    </div>
+        
+        <div class="transport-options">
+            <h2 data-translate="transport-title">যাতায়াত বিকল্প</h2>
+            
+            <div class="transport-card">
+                <h4><span>🚍</span> <span data-translate="bus-title">বাস</span></h4>
+                <p data-translate="bus-info">সেতাবগঞ্জ বাস স্ট্যান্ড থেকে পায়ে হেঁটে ৫ মিনিট (৩০০ মিটার)</p>
+            </div>
+            
+            <div class="transport-card">
+                <h4><span>🚕</span> <span data-translate="taxi-title">ট্যাক্সি/অটো</span></h4>
+                <p data-translate="taxi-info">সেতাবগঞ্জ বাজারে নেমে আমাদের গেট পর্যন্ত</p>
+            </div>
+            
+            <div class="transport-card">
+                <h4><span>🚗</span> <span data-translate="car-title">ব্যক্তিগত গাড়ি</span></h4>
+                <p data-translate="car-info">দিনাজপুর-বোচাগঞ্জ সড়কের মিলরোড ক্রসিং থেকে ২০০ মিটার ভিতরে</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; ২০২৪ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+        <div class="footer-container">
+            <div class="footer-about">
+                <img src="assets/images/logo-white.png" alt="মিলরোড ঠাকুরবাড়ী লোগো" class="footer-logo">
+                <p data-translate="footer-about">৭২ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3 data-translate="quick-links">দ্রুত লিঙ্ক</h3>
+                <a href="index.html" data-translate="home-link">হোম</a>
+                <a href="about.html" data-translate="history-link">ইতিহাস</a>
+                <a href="gallery.html" data-translate="gallery-link">গ্যালারি</a>
+                <a href="contact.html" data-translate="contact-link">যোগাযোগ</a>
+            </div>
+            
+            <div class="footer-contact">
+                <h3 data-translate="contact-title">যোগাযোগ</h3>
+                <p>মিলরোড, সেতাবগঞ্জ, বোচাগঞ্জ, দিনাজপুর</p>
+                <p>📞 ০১৭০০৬৭৬৬৭৯</p>
+                <p>📞 ০১৭২২৯৮০১৫১</p>
+                <p>📧 millroadthakurbarimondob@gmail.com</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p data-translate="copyright-text">© ২০২৫ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি | সকল স্বত্ব সংরক্ষিত</p>
+        </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/languages.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        // Initialize Google Map
+        function initMap() {
+            const location = { lat: 25.6519, lng: 88.6632 }; // Coordinates for Milroad, Setabganj
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 16,
+                center: location,
+                mapId: "YOUR_MAP_ID"
+            });
+            
+            // Add marker
+            new google.maps.Marker({
+                position: location,
+                map: map,
+                title: "মিলরোড ঠাকুরবাড়ী বারোয়ারী মন্ডপ",
+                icon: {
+                    url: "assets/images/map-marker.png",
+                    scaledSize: new google.maps.Size(40, 40)
+                }
+            });
+            
+            // Add info window
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div style="padding: 0.5rem;">
+                        <h3 style="margin: 0 0 0.5rem; color: var(--primary-color);">মিলরোড ঠাকুরবাড়ী</h3>
+                        <p style="margin: 0;">সেতাবগঞ্জ, বোচাগঞ্জ, দিনাজপুর</p>
+                    </div>
+                `
+            });
+            
+            // Open info window by default
+            infoWindow.open(map, marker);
+        }
+        
+        // Apply translations on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLanguage = localStorage.getItem('preferredLanguage') || 'bn';
+            changeLanguage(savedLanguage);
+        });
+        
+        // Language switching function
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.lang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+                if ((lang === 'bn' && btn.textContent === 'বাংলা') ||
+                    (lang === 'en' && btn.textContent === 'English') ||
+                    (lang === 'hi' && btn.textContent === 'हिन्दी')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            applyTranslations();
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // RTL handling for Hindi
+            if (lang === 'hi') {
+                document.body.classList.add('rtl');
+            } else {
+                document.body.classList.remove('rtl');
+            }
+        }
+        
+        // Handle Google Maps API loading errors
+        window.gm_authFailure = function() {
+            const mapContainer = document.getElementById('map');
+            if (mapContainer) {
+                mapContainer.innerHTML = `
+                    <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 1rem;">
+                        <p style="color: red; font-weight: bold;">ম্যাপ লোড করতে সমস্যা হচ্ছে</p>
+                        <p>আপনি নিচের বাটনে ক্লিক করে গুগল ম্যাপে আমাদের অবস্থান দেখতে পারেন</p>
+                    </div>
+                `;
+            }
+        };
+    </script>
 </body>
 </html>
