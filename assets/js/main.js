@@ -1,31 +1,28 @@
-// Language management
-let currentLanguage = 'bn'; // Default language
-
-function changeLanguage(lang) {
-    currentLanguage = lang;
-    applyTranslations();
-    localStorage.setItem('preferredLanguage', lang);
-}
-
-function applyTranslations() {
-    // Get all elements with data-translate attribute
-    const translatableElements = document.querySelectorAll('[data-translate]');
-    
-    translatableElements.forEach(element => {
-        const key = element.getAttribute('data-translate');
-        if (translations[key] && translations[key][currentLanguage]) {
-            element.textContent = translations[key][currentLanguage];
-        }
-    });
-    
-    // Update HTML lang attribute
-    document.documentElement.lang = currentLanguage;
-}
-
-// Load preferred language from localStorage
+// Mobile Menu Toggle
 document.addEventListener('DOMContentLoaded', function() {
-    const savedLanguage = localStorage.getItem('preferredLanguage');
-    if (savedLanguage) {
-        changeLanguage(savedLanguage);
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navContainer = document.querySelector('.nav-container');
+    
+    if (mobileMenuBtn && navContainer) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navContainer.classList.toggle('active');
+        });
     }
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-container a').forEach(link => {
+        link.addEventListener('click', function() {
+            navContainer.classList.remove('active');
+        });
+    });
+});
+
+// Current year for copyright
+document.addEventListener('DOMContentLoaded', function() {
+    const yearElements = document.querySelectorAll('[data-current-year]');
+    const currentYear = new Date().getFullYear();
+    
+    yearElements.forEach(element => {
+        element.textContent = currentYear;
+    });
 });
