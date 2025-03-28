@@ -1,22 +1,10 @@
-/**
- * Complete Translation File for Milroad Thakurbari Mondop
- * Contains all UI text in Bengali, English, and Hindi
- */
-
 const translations = {
-    // Site Wide Texts
+    // Common Translations
     'site-title': {
-        'bn': 'মিলরোড ঠাকুরবাড়ী বারোয়ারী মণ্ডপ',
-        'en': 'Milroad Thakurbari Community Pavilion',
+        'bn': 'মিলরোড ঠাকুরবাড়ী বারোয়ারী মন্ডপ',
+        'en': 'Milroad Thakurbari Community Mondop',
         'hi': 'मिलरोड ठाकुरबाड़ी सामुदायिक मंडप'
     },
-    'established-text': {
-        'bn': 'প্রতিষ্ঠা ১৯৫২ | ঐতিহ্য ও সংস্কৃতির ধারক',
-        'en': 'Established 1952 | Bearer of Tradition',
-        'hi': 'स्थापना १९५२ | परंपरा के संवाहक'
-    },
-
-    // Navigation
     'home-link': {
         'bn': 'হোম',
         'en': 'Home',
@@ -47,170 +35,38 @@ const translations = {
         'en': 'Contact',
         'hi': 'संपर्क'
     },
-
-    // Hero Section
+    'copyright-text': {
+        'bn': '© ২০২৫ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি | সকল স্বত্ব সংরক্ষিত',
+        'en': '© 2025 Milroad Thakurbari Puja Committee | All Rights Reserved',
+        'hi': '© 2025 मिलरोड ठाकुरबाड़ी पूजा समिति | सर्वाधिकार सुरक्षित'
+    },
+    
+    // Homepage Specific
     'default-welcome': {
-        'bn': 'মিলরোড ঠাকুরবাড়ী বারোয়ারী মণ্ডপে আপনাকে স্বাগতম',
-        'en': 'Welcome to Milroad Thakurbari Community Pavilion',
+        'bn': 'মিলরোড ঠাকুরবাড়ী বারোয়ারী মন্ডপে আপনাকে স্বাগতম',
+        'en': 'Welcome to Milroad Thakurbari Community Mondop',
         'hi': 'मिलरोड ठाकुरबाड़ी सामुदायिक मंडप में आपका स्वागत है'
     },
-    'schedule-btn': {
-        'bn': 'প্রোগ্রাম সিডিউল দেখুন',
-        'en': 'View Event Schedule',
-        'hi': 'कार्यक्रम अनुसूची देखें'
+    'main-heading': {
+        'bn': 'শ্রী শ্রী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা ২০২৫',
+        'en': 'Shri Shri Milroad Thakurbari Community Puja 2025',
+        'hi': 'श्री श्री मिलरोड ठाकुरबाड़ी सामुदायिक पूजा 2025'
     },
-
-    // Countdown Section
-    'countdown-text': {
-        'bn': 'আর মাত্র...',
-        'en': 'Only... remaining',
-        'hi': 'केवल... शेष'
-    },
-    'days-label': {
-        'bn': 'দিন',
-        'en': 'Days',
-        'hi': 'दिन'
-    },
-    'hours-label': {
-        'bn': 'ঘণ্টা',
-        'en': 'Hours',
-        'hi': 'घंटे'
-    },
-    'minutes-label': {
-        'bn': 'মিনিট',
-        'en': 'Minutes',
-        'hi': 'मिनट'
-    },
-    'seconds-label': {
-        'bn': 'সেকেন্ড',
-        'en': 'Seconds',
-        'hi': 'सेकंड'
-    },
-
-    // Gallery Section
-    'gallery-title': {
-        'bn': 'গ্যালারি থেকে নির্বাচিত ছবি',
-        'en': 'Featured Gallery',
-        'hi': 'चुनिंदा गैलरी'
-    },
-    'gallery-subtitle': {
-        'bn': 'আমাদের মণ্ডপের সেরা মুহূর্তগুলো',
-        'en': 'Best moments from our pavilion',
-        'hi': 'हमारे मंडप के श्रेष्ठ क्षण'
-    },
-    'gallery-image': {
-        'bn': 'মণ্ডপের ছবি',
-        'en': 'Pavilion image',
-        'hi': 'मंडप की तस्वीर'
-    },
-    'loading-text': {
-        'bn': 'ছবি লোড হচ্ছে...',
-        'en': 'Loading images...',
-        'hi': 'तस्वीरें लोड हो रही हैं...'
-    },
-    'no-images': {
-        'bn': 'কোন ছবি পাওয়া যায়নি',
-        'en': 'No images found',
-        'hi': 'कोई तस्वीर नहीं मिली'
-    },
-    'view-all-btn': {
-        'bn': 'সমস্ত গ্যালারি দেখুন',
-        'en': 'View Full Gallery',
-        'hi': 'पूरी गैलरी देखें'
-    },
-
-    // Notices Section
-    'notices-title': {
-        'bn': 'নোটিশ বোর্ড',
-        'en': 'Notice Board',
-        'hi': 'सूचना बोर्ड'
-    },
-    'default-notice': {
-        'bn': 'মণ্ডপ উদ্বোধন হবে ১০ অক্টোবর সকাল ১০টায়',
-        'en': 'Pavilion will open on October 10 at 10 AM',
-        'hi': 'मंडप 10 अक्टूबर को सुबह 10 बजे खुलेगा'
-    },
-    'update-prefix': {
-        'bn': 'আপডেট',
-        'en': 'Updated',
-        'hi': 'अपडेटेड'
-    },
-
-    // Footer
-    'footer-about': {
-        'bn': '৭২ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি',
-        'en': '72 years of tradition - Milroad Thakurbari Puja Committee',
-        'hi': '72 वर्ष की परंपरा - मिलरोड ठाकुरबाड़ी पूजा समिति'
-    },
-    'quick-links': {
-        'bn': 'দ্রুত লিঙ্ক',
-        'en': 'Quick Links',
-        'hi': 'त्वरित लिंक'
-    },
-    'contact-title': {
-        'bn': 'যোগাযোগ',
-        'en': 'Contact Us',
-        'hi': 'संपर्क करें'
-    },
-    'copyright-text': {
-        'bn': '© ২০২৪ মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি | সকল স্বত্ব সংরক্ষিত',
-        'en': '© 2024 Milroad Thakurbari Puja Committee | All Rights Reserved',
-        'hi': '© २०२४ मिलरोड ठाकुरबाड़ी पूजा समिति | सर्वाधिकार सुरक्षित'
-    },
-
-    // Admin Panel Texts
-    'admin-login-title': {
-        'bn': 'এডমিন লগইন',
-        'en': 'Admin Login',
-        'hi': 'व्यवस्थापक लॉगिन'
-    },
-    'current-message': {
-        'bn': 'বর্তমান বার্তা',
-        'en': 'Current Message',
-        'hi': 'वर्तमान संदेश'
-    }
-    // About Page Specific Translations
-'about-title': {
-    'bn': 'ইতিহাস - মিলরোড ঠাকুরবাড়ী',
-    'en': 'History - Milroad Thakurbari',
-    'hi': 'इतिहास - मिलरोड ठाकुरबाड़ी'
-},
-'about-subtitle': {
-    'bn': '৭২ বছরের গৌরবময় ঐতিহ্য',
-    'en': '72 Years of Glorious Heritage',
-    'hi': '72 वर्षों की गौरवशाली विरासत'
-},
-'timeline-heading': {
-    'bn': 'আমাদের যাত্রাপথ',
-    'en': 'Our Journey',
-    'hi': 'हमारी यात्रा'
-},
-// Add all other timeline year and description translations
-'year-1952': {
-    'bn': '১৯৫২',
-    'en': '1952',
-    'hi': '१९५२'
-},
-'timeline-1952-title': {
-    'bn': 'প্রতিষ্ঠা পর্ব',
-    'en': 'Foundation',
-    'hi': 'स्थापना'
-},
-// Continue for all timeline items
-'committee-title': {
-    'bn': 'বর্তমান কমিটি',
-    'en': 'Current Committee',
-    'hi': 'वर्तमान समिति'
-},
-'president-name': {
-    'bn': 'ড. অরুণ কুমার চক্রবর্তী',
-    'en': 'Dr. Arun Kumar Chakraborty',
-    'hi': 'डॉ. अरुण कुमार चक्रवर्ती'
-}
-// Add all other committee member translations
+    
+    // Add all other translations used in your pages...
+    // This should include all data-translate keys from all HTML files
 };
 
-// For Node.js/CommonJS environments
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = translations;
+// Function to apply translations
+function applyTranslations() {
+    document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[key] && translations[key][currentLanguage]) {
+            if (element.tagName === 'INPUT' && element.hasAttribute('placeholder')) {
+                element.setAttribute('placeholder', translations[key][currentLanguage]);
+            } else {
+                element.textContent = translations[key][currentLanguage];
+            }
+        }
+    });
 }
