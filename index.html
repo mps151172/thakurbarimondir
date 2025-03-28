@@ -161,18 +161,18 @@
         <button onclick="changeLanguage('hi')">हिन्दी</button>
     </div>
 
-    <!-- হেডার সেকশন -->
+    <!-- Header Section -->
     <header>
         <div class="header-container">
-            <img src="assets/images/logo.png" alt="মিলরোড ঠাকুরবাড়ী লোগो" class="logo">
+            <img src="assets/images/logo.png" alt="মিলরোড ঠাকুরবাড়ী লোগো" class="logo">
             <div class="header-text">
                 <h1 data-translate="site-title">মিলরোড ঠাকুরবাড়ী বারোয়ারী মন্ডপ</h1>
-                <p data-translate="established-text">প্রতিষ্ঠা ২০০০ | ঐতিহ্য ও সংস্কৃতির ধারক</p>
+                <p data-translate="established-text">প্রতিষ্ঠা ১৯৫২ | ঐতিহ্য ও সংস্কৃতির ধারক</p>
             </div>
         </div>
     </header>
 
-    <!-- নেভিগেশন -->
+    <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <a href="index.html" class="active" data-translate="home-link">হোম</a>
@@ -185,11 +185,10 @@
         </div>
     </nav>
 
-    <!-- হিরো সেকশন -->
+    <!-- Hero Section -->
     <section class="hero-section">
         <div class="welcome-message">
             <div id="dynamicWelcome" class="welcome-message-content" data-translate="default-welcome">
-                <!-- Dynamic welcome message will load here -->
                 মিলরোড ঠাকুরবাড়ী বারোয়ারী মন্ডপে আপনাকে স্বাগতম
             </div>
         </div>
@@ -198,7 +197,7 @@
         <a href="events.html" class="btn btn-large" data-translate="schedule-btn">প্রোগ্রাম সিডিউল দেখুন</a>
     </section>
 
-    <!-- কাউন্টডাউন সেকশন -->
+    <!-- Countdown Section -->
     <section class="countdown-section">
         <h2 data-translate="countdown-text">আর মাত্র...</h2>
         <div class="countdown-container" id="countdown">
@@ -221,14 +220,13 @@
         </div>
     </section>
 
-    <!-- ফিচার্ড গ্যালারি -->
+    <!-- Featured Gallery -->
     <section class="featured-gallery">
         <div class="container">
             <h2 data-translate="gallery-title">গ্যালারি থেকে নির্বাচিত ছবি</h2>
             <p data-translate="gallery-subtitle">আমাদের মণ্ডপের সেরা মুহূর্তগুলো</p>
             
             <div class="gallery-preview" id="featuredGallery">
-                <!-- Dynamic gallery items will load here -->
                 <div class="loading" data-translate="loading-text">ছবি লোড হচ্ছে...</div>
             </div>
             
@@ -238,26 +236,25 @@
         </div>
     </section>
 
-    <!-- নোটিশ বোর্ড -->
+    <!-- Notice Board -->
     <section class="notice-board">
         <div class="container">
             <h2 data-translate="notices-title">নোটিশ বোর্ড</h2>
             <div id="noticeContainer">
-                <!-- Dynamic notices will load here -->
                 <div class="notice-item">
                     <p data-translate="default-notice">০৩ এপ্রিল ২০২৫ইং দেবীর আমন্ত্রন এবং অধিবাস</p>
-                    <small data-translate="update-prefix">আপডেট: <span id="noticeDate">০৩ এপ্রিল ২০২৫ইং </span></small>
+                    <small data-translate="update-prefix">আপডেট: <span id="noticeDate">০৩ এপ্রিল ২০২৫ইং</span></small>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ফুটার -->
+    <!-- Footer -->
     <footer>
         <div class="footer-container">
             <div class="footer-about">
                 <img src="assets/images/logo-white.png" alt="মিলরোড ঠাকুরবাড়ী লোগো" class="footer-logo">
-                <p data-translate="footer-about">২৪ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
+                <p data-translate="footer-about">৭২ বছরের ঐতিহ্যবাহী মিলরোড ঠাকুরবাড়ী বারোয়ারী পূজা কমিটি</p>
             </div>
             
             <div class="footer-links">
@@ -270,10 +267,10 @@
             
             <div class="footer-contact">
                 <h3 data-translate="contact-title">যোগাযোগ</h3>
-                <p>মিলরোড, সেতাবগঞ্জ, বোচাগঞ্জ, দিনাজপুর </p>
+                <p>মিলরোড, সেতাবগঞ্জ, বোচাগঞ্জ, দিনাজপুর</p>
                 <p>📞 ০১৭০০৬৭৬৬৭৯</p>
                 <p>📞 ০১৭২২৯৮০১৫১</p>
-                <p>📧millroadthakurbarimondob@gmail.com</p>
+                <p>📧 millroadthakurbarimondob@gmail.com</p>
             </div>
         </div>
         
@@ -282,9 +279,28 @@
         </div>
     </footer>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Firebase SDK (Modular Version) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDtrjgqh42-fg-XYpfWmysR7J4gnCOx3jM",
+            authDomain: "thakurbari-mondop.firebaseapp.com",
+            databaseURL: "https://thakurbari-mondop-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "thakurbari-mondop",
+            storageBucket: "thakurbari-mondop.appspot.com",
+            messagingSenderId: "286117037608",
+            appId: "1:286117037608:web:9be8197d021ae69672971d",
+            measurementId: "G-0VZQJVSSJ6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        
+        // Make database available globally
+        window.firebaseDatabase = database;
+    </script>
     
     <!-- Translation Library -->
     <script src="assets/js/languages.js"></script>
@@ -292,27 +308,8 @@
     <!-- Main Scripts -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/countdown.js"></script>
-
-    <!-- Firebase SDK (নতুন ভার্সন) -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
-  import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-database.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDtrjgqh42-fg-XYpfWmysR7J4gnCOx3jM",
-    authDomain: "thakurbari-mondop.firebaseapp.com",
-    databaseURL: "https://thakurbari-mondop-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "thakurbari-mondop",
-    storageBucket: "thakurbari-mondop.appspot.com",
-    messagingSenderId: "286117037608",
-    appId: "1:286117037608:web:9be8197d021ae69672971d",
-    measurementId: "G-0VZQJVSSJ6"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-</script>
-         <script>
+    
+    <script>
         // Language Management
         let currentLanguage = 'bn'; // Default language
         
@@ -342,8 +339,8 @@
         
         // Load welcome message from Firebase
         function loadWelcomeMessage() {
-            const welcomeRef = firebase.database().ref('welcomeMessages/default');
-            welcomeRef.on('value', (snapshot) => {
+            const welcomeRef = ref(firebaseDatabase, 'welcomeMessages/default');
+            onValue(welcomeRef, (snapshot) => {
                 const data = snapshot.val();
                 const welcomeElement = document.getElementById('dynamicWelcome');
                 
@@ -357,10 +354,10 @@
         
         // Load notices from Firebase
         function loadNotices() {
-            const noticesRef = firebase.database().ref('notices').limitToLast(3);
+            const noticesRef = ref(firebaseDatabase, 'notices');
             const noticeContainer = document.getElementById('noticeContainer');
             
-            noticesRef.on('value', (snapshot) => {
+            onValue(noticesRef, (snapshot) => {
                 const noticesData = snapshot.val();
                 noticeContainer.innerHTML = '';
                 
@@ -396,15 +393,15 @@
         
         // Load featured gallery images
         function loadFeaturedGallery() {
-            const galleryRef = firebase.database().ref('gallery').limitToLast(4);
+            const galleryRef = ref(firebaseDatabase, 'gallery');
             const galleryContainer = document.getElementById('featuredGallery');
             
-            galleryRef.on('value', (snapshot) => {
+            onValue(galleryRef, (snapshot) => {
                 const galleryData = snapshot.val();
                 galleryContainer.innerHTML = '';
                 
                 if (galleryData) {
-                    Object.keys(galleryData).forEach(key => {
+                    Object.keys(galleryData).slice(0, 4).forEach(key => {
                         const item = galleryData[key];
                         const galleryItem = document.createElement('div');
                         galleryItem.className = 'gallery-item';
