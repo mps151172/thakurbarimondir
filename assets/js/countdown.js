@@ -1,36 +1,34 @@
-// পূজার তারিখ সেট করুন (অক্টোবর 10, 2024 সকাল 10টা)
-const pujaDate = new Date("October 10, 2025 10:00:00").getTime();
+function initializeCountdown() {
+    // Set the date we're counting down to (Puja start date)
+    const countDownDate = new Date("May 10, 2025 00:00:00").getTime();
 
-const countdownTimer = setInterval(function() {
-    const now = new Date().getTime();
-    const distance = pujaDate - now;
+    // Update the countdown every 1 second
+    const countdownFunction = setInterval(function() {
+        // Get today's date and time
+        const now = new Date().getTime();
+        
+        // Find the distance between now and the countdown date
+        const distance = countDownDate - now;
+        
+        // Time calculations for days, hours, minutes and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Display the result
+        document.getElementById("days").textContent = days.toString().padStart(2, '0');
+        document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+        document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+        document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+        
+        // If the countdown is finished, write some text
+        if (distance < 0) {
+            clearInterval(countdownFunction);
+            document.getElementById("countdown").innerHTML = "<h3>পূজা শুরু হয়ে গেছে!</h3>";
+        }
+    }, 1000);
+}
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("countdown-timer").innerHTML = `
-        <div class="countdown-box">
-            <span>${days}</span>
-            <small>দিন</small>
-        </div>
-        <div class="countdown-box">
-            <span>${hours}</span>
-            <small>ঘণ্টা</small>
-        </div>
-        <div class="countdown-box">
-            <span>${minutes}</span>
-            <small>মিনিট</small>
-        </div>
-        <div class="countdown-box">
-            <span>${seconds}</span>
-            <small>সেকেন্ড</small>
-        </div>
-    `;
-
-    if (distance < 0) {
-        clearInterval(countdownTimer);
-        document.getElementById("countdown-timer").innerHTML = "<p>পূজা শুরু হয়েছে!</p>";
-    }
-}, 1000);
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initializeCountdown);
